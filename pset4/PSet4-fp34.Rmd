@@ -1,0 +1,89 @@
+---
+author:
+title: "EDAV Fall 2020 PSet 4"
+output: html_document
+---
+
+This assignment is designed to help you get started on the final project. Be sure to review the final project instructions (https://edav.info/project.html).
+    
+### 1. The Team
+
+[8 points]
+
+a) Who's on the team? (Include names and UNIs)
+
+Chenchao You(cy2584), Junzhi GE(jg4281), Natasha McLeod(nm2332).
+
+b) How do you plan to divide up the work? (Grading is on a group basis. The point of asking is to encourage you to think about this and design a plan.)
+
+We plan to divide the project into data cleaning and data visualization. As suggested by professor inclass, 30% data cleaning by 1 team member and 70% data visualization by the other 2 team members. However this is not absolute since we will be working closely together in each step, offering suggestions and ideas.
+
+c) What is your plan for managing the git/GitHub workflow? That is, who will merge pull requests? How will you attempt to avoid conflicts? How will you communicate?
+
+Chenchao You will be managing the github repo/pull requests for now, unless others volunteer to do it instead. We will be communicating through linkedin group message chats to avoid conflicts.
+
+### 2. The Questions
+
+[10 points]
+
+List three questions that you hope you will be able to answer from your research. (It's ok if these change as your work progresses.)
+
+a)  We want to know the variables that may impact NYS Covid situation
+  
+  
+b)  We want to know the distribution of NYS Covid Cases
+  
+  
+c)  We want to know the impact of NYS Covid cases to social/economic activity
+  
+
+### 3. GitHub repo
+
+[8 points]
+
+a) Set up your final project repository following the EDAVproject template. Provide the link to the repo.
+
+https://github.com/Chenchaoyou/Covid-Health
+
+b) Make sure that all team members have write access to the repository and have practiced making contributions. Provide a link to the contributors page of your repository showing that all team members have made contributions to the repo (Note that we do not have the ability to see who has write access, only contributors):
+
+https://github.com/Chenchaoyou/Covid-Health/graphs/contributors
+
+### 4. Data Sources
+
+[8 points]
+
+Write a draft of the [Data Sources chapter](https://edav.info/project#report-format).
+
+#### Data Sources
+
+Natasha will be mainly working with health data collection. However, we will all participate in the process, offering suggestions and ideas.
+
+NYS Gov has provided relevant Covid Data (https://data.ny.gov/browse?tags=covid-19) and we will select the data we need from the Gov Database. To study the implication of Covid pandemic, we will use Big City Health Data to monitor the health situation of residence in NYS.
+
+Specific dataset type and issues are to be found and dealt with in the future.
+
+### 5. Data Transformation
+
+[8 points]
+
+Write a draft of the [Data Transformation chapter](https://edav.info/project#report-format)
+
+#### Data Transformation
+
+The source data will be mostly in .csv or .xslx format published by the NYS government. We will be preliminarily checking for correctness in excel before moving to R with tidyverse. In R, we will transform the dataframe into tidy data.
+
+We will store any additional data we find or webscrape in .csv format, which is easy to work with in R.
+
+### 6. Missing Values
+
+[8 points]
+
+Write a draft of the [Missing Values chapter](https://edav.info/project#report-format)
+
+#### Missing Data
+
+We expect only a few missing values to be present due to the process of merging data from different sources. Those missing values can be dealt with either by replacing with sample mean or replace with random noise.
+
+Missing value pattern:
+Missing values come primarily from merging xxx.csv and xxx.csv ...

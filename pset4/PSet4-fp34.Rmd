@@ -1,5 +1,5 @@
 ---
-author: Junzhi Ge
+author: Chenchao You(cy2584), Junzhi GE(jg4281), Natasha McLeod(nm2332)
 title: "EDAV Fall 2020 PSet 4"
 output: html_document
 ---

@@ -1,5 +1,5 @@
 ---
-author:
+author: Junzhi Ge
 title: "EDAV Fall 2020 PSet 4"
 output: html_document
 ---

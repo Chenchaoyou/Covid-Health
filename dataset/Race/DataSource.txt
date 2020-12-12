@@ -1,0 +1,1 @@
+https://data.census.gov/cedsci/table?q=race&g=0400000US36.050000&y=2019&tid=ACSDT5Y2019.B02001&moe=false&tp=true&hidePreview=true

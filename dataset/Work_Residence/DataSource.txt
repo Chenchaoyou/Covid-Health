@@ -1,0 +1,1 @@
+https://data.census.gov/cedsci/table?q=county%20level&g=0400000US36.050000&y=2019&tid=ACSDT1Y2019.B08007&moe=false&tp=false&hidePreview=true

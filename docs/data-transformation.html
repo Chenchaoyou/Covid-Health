@@ -21,10 +21,10 @@
   
   
 
-<meta name="author" content="Final Project Group" />
+<meta name="author" content="Final Project Group 23, Junzhi Ge, Natasha McLeod, Chenchao You" />
 
 
-<meta name="date" content="2020-12-05" />
+<meta name="date" content="2020-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -100,6 +100,13 @@
             <section class="normal" id="section-">
 <div id="data-transformation" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
+<p>The datasets are all under the dataset folder (./dataset), and we will discuss the data cleaning/transformation of each dataset in details below:</p>
+<p><b>*Health Data</b> (./dataset/Covid): the data is in good shape as it is. We only changed the column names, replacing blank spaces with underscores for better R compatibility.</p>
+<p><b>*Political Data</b> (./dataset/Election): the data is also clean and we only changed the column names, replacing blank spaces and abbreviated candidate names.</p>
+<p><b>*Economic Data</b> (./dataset/Income): the economic data is gathered from US census bureau, thus the margin of error is provided for each column. After careful observation, we decided that the margin of error is trivial comparing to the reported numbers and thus we can omit the margin errors in our exploratory data analysis. The dataset is transposed to have counties in rows and variables in columns. Same column name replacement is performed to have better compatibility with R. We also deleted sub-columns corresponding to fine-grained age groups. We believe that if the bin size is too small, the patterns will be less obivous in the exploratory visualization.</p>
+<p><b>*Geographic Data</b> (./dataset/Map): this is a shapefile that can be imported with <b>rgdal</b> package in R.</p>
+<p><b>*Demographic Data</b> (./dataset/Race): the demographic data is collected from US census bureau. The same margin of error omittance, column name replacement, and table transposition are performed.</p>
+<p><b>*Labor Mobility Data</b> (./dataset/Work_Residence): the labor data is collected from US census bureau. The same margin of error omittance, column name replacement, and table transposition are performed. We also deleted sub-columns that corresponds to categories that are too subdivided.</p>
 
 </div>
             </section>

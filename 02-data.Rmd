@@ -1,2 +1,27 @@
 # Data sources
 
+Six different datasets corresponding to five factor variables plus one dependent variable are gathered for this project. They are:
+
+<b>*Health Data</b> (./dataset/Covid, gathered by Chenchao)
+
+<b>*Political Data</b> (./dataset/Election, gathered by Natasha)
+
+<b>*Economic Data</b> (./dataset/Income, gathered by Chenchao)
+
+<b>*Geographic Data</b> (./dataset/Map, gathered by Chenchao)
+
+<b>*Demographic Data</b> (./dataset/Race, gathered by Chenchao)
+
+<b>*Labor Mobility Data</b> (./dataset/Work_Residence, gathered by Chenchao)
+
+Health Data is collected through <b>State of New York Open Data</b> (https://data.ny.gov/) under the Covid-19 Tag. The dataset consists of new/cumulative positive cases of Covid and new/cumulative test numbers gathered by date and by counties. A total of 16926 rows are reported.
+
+Political Data, namely the 2020 election results data, are gathered through <b>NYS Board of Elections</b> (https://www.elections.ny.gov). The data records number of voters who voted for different presidential candidate by each county. A total of 64 rows of data are reported (62 counties + total vote by candidate + total vote by party).
+
+Geographic Data is the NYS map in the form of shapefile, which is ready to be used in mapping variables to counties.
+
+Economic Data are collected from <b>US Census Bureau</b> (https://data.census.gov/cedsci/) under the keyword INCOME/POVERTY. The data shows number of population of different age groups determined to be under poverty by county reports.
+
+Demographic Data are gathered from <b>US Census Bureau</b> (https://data.census.gov/cedsci/) under the keyword race. We chose the more general race data over the specific detailed race subgroup count, because we believe that race subgroups are too detailed for observing patterns in the exploratory data analysis. The dataset consists of race counts by counties. There are 62 rows of data each corresponding to a county.
+
+Labor Mobility Data are also from <b>US Census Bureau</b> (https://data.census.gov/cedsci/) under the keyword PLACE OF WORK. It consists of number of workers working inside/outside place of residence and the number of population without residence, reported by each county. The data has 62 rows corresponding to 62 county reports.

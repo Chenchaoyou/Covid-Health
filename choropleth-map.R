@@ -10,7 +10,7 @@ nys_spdf <- readOGR(
 nys_poly <- nys_spdf@polygons
 
 nys_case <- 
-  read.csv("./dataset/Covid Test/New_York_State_Statewide_COVID-19_Testing.csv",
+  read.csv("./dataset/Covid/NYS_Covid_Case.csv",
            , sep=",", dec=".")
 
 nys_case_1 <- nys_case[nys_case$Test.Date == '04/14/2020',]

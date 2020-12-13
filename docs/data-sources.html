@@ -24,7 +24,7 @@
 <meta name="author" content="Final Project Group" />
 
 
-<meta name="date" content="2020-12-05" />
+<meta name="date" content="2020-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -100,6 +100,18 @@
             <section class="normal" id="section-">
 <div id="data-sources" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Data sources</h1>
+<p>Six different datasets corresponding to five factor variables plus one dependent variable are gathered for this project. They are:</p>
+<p><b>*Health Data</b> (./dataset/Covid, gathered by Chenchao)</p>
+<p><b>*Political Data</b> (./dataset/Election, gathered by Natasha)</p>
+<p><b>*Economic Data</b> (./dataset/Income, gathered by Chenchao)</p>
+<p><b>*Geographic Data</b> (./dataset/Map, gathered by Chenchao)</p>
+<p><b>*Demographic Data</b> (./dataset/Race, gathered by Chenchao)</p>
+<p><b>*Labor Mobility Data</b> (./dataset/Work_Residence, gathered by Chenchao)</p>
+<p>Health Data is collected through <b>State of New York Open Data</b> (<a href="https://data.ny.gov/" class="uri">https://data.ny.gov/</a>) under the Covid-19 Tag. The dataset consists of new/cumulative positive cases of Covid and new/cumulative test numbers gathered by date and by counties. A total of 16926 rows are reported.</p>
+<p>Political Data, namely the 2020 election results data, are gathered through <b>NYS Board of Elections</b> (<a href="https://www.elections.ny.gov" class="uri">https://www.elections.ny.gov</a>). The data records number of voters who voted for different presidential candidate by each county. A total of 64 rows of data are reported (62 counties + total vote by candidate + total vote by party).</p>
+<p>Geographic Data is the NYS map in the form of shapefile, which is ready to be used in mapping variables to counties.</p>
+<p>Demographic Data are gathered from <b>US Census Bureau</b> (<a href="https://data.census.gov/cedsci/" class="uri">https://data.census.gov/cedsci/</a>) under the keyword race. We chose the more general race data over the specific detailed race subgroup count, because we believe that race subgroups are too detailed for observing patterns in the exploratory data analysis. The dataset consists of race counts by counties. There are 62 rows of data each corresponding to a county.</p>
+<p>Labor Mobility Data are also from <b>US Census Bureau</b> (<a href="https://data.census.gov/cedsci/" class="uri">https://data.census.gov/cedsci/</a>) under the keyword PLACE OF WORK. It consists of total number of workers and number of workers working inside/outside county, reported by each county. The data has 39 rows corresponding to 39 out of 62 county reports and we are missing 23 county data.</p>
 
 </div>
             </section>

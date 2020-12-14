@@ -1,1 +1,41 @@
 # Missing values
+
+```{r download extracat, echo=FALSE, eval=FALSE}
+  install.packages('digest', repos='http://cran.us.r-project.org')
+  install.packages('devtools')
+  library(devtools)
+  install_url('https://cran.r-project.org/src/contrib/Archive/extracat/extracat_1.7-6.tar.gz')
+```
+
+```{r load library}
+  library(extracat)
+  library(readxl)
+  library(dplyr)
+```
+
+We observed missing values in the Political Data and Income Data, which is visualized below via <b>extracat::visna</b> approach. The missing value distribution will be visualized and method to replace NA values will be proposed.
+
+## Political Data Missing Values
+
+```{r visna Pol, eval=TRUE}
+  eledata <- read_excel("./dataset/Election/2020President.xlsx")
+  extracat::visna(eledata)
+```
+
+After taking a closer look at the dataset, we find that the only missing values in the election result dataset are a row missing number of void votes and blank votes.
+
+```{r eledata missing row, eval=TRUE}
+  narow <- eledata[is.na(eledata$Void), ] 
+  narow[,c("County","Biden(DEM)","Trump(REP)","Void","Blank")]
+```
+
+We replaced those missing values with the median of the corresponding columns. We choose median over mean because the variance of Void and Blank votes are high and median is more robust when extreme outliers are present. We replace the missing value of Void votes with median value of 202 and Blank votes with median value of 102.
+
+## Income Data Missing Values
+
+```{r visna Inc, eval=TRUE}
+  incdata <- read_excel("./dataset/Income/Income_Missing.xlsx")
+  extracat::visna(incdata)
+```
+
+From the missing pattern visualization we observe that roughly 1/3 of the counties are not reporting any data. We found out that the 2019 estimate from US Census Bureau is not complete and thus data from over 20 counties are not available. To fill the missing values, we decided to estimate the data of the missing counties using the 5-year average from 2014-2018. The resulting filled data is stored under "./dataset/Income/Income.xlsx"

@@ -5,3 +5,6 @@ missing-values
 results
 interactive-component
 conclusion
+political-data-missing-values
+income-data-missing-values
+choropleth-map-showing-commuter-packed-counties-and-covid-cases.

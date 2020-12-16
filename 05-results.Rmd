@@ -127,7 +127,7 @@ info_nov <- as_tibble(info_nov)
 # Construct Leaflet Map
 mymap <- leaflet() %>% 
   addProviderTiles("Esri.WorldGrayCanvas",
-                   options = tileOptions(minZoom=2, maxZoom=10)
+                   options = tileOptions(minZoom=6, maxZoom=10)
   )%>%
   addPolygons(data = nys_spdf, 
               fillColor = ~palette(nys_spdf@data$commuter),

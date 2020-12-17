@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Shapes</title>
+		<script src="https://d3js.org/d3.v6.js"></script>  <!-- link to D3 library -->
+	</head>
+
+	<body>
+
+		<script>
+		
+		svg = d3.select('body').append('svg').attr('width', 1000).attr('height', 500)
+		  
+		svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 500).attr('fill', '#f7f2ee')
+		
+		      svg.append('text').attr('x', 80).attr('y',200).text('Wear mask to keep yourself safe.').attr('font-size', '20px')
+
+		
+			const yScale = d3.scaleLinear()
+	  	.domain([0, 500])
+      .range([500, 0]);
+		
+		svg.append('circle').attr('id', 'face_b').attr('cx', 500).attr('cy', yScale(250)).attr('r', 150).attr('fill', 'white').attr('stroke', 'black')
+		svg.append('circle').attr('id', 'leye').attr('cx', 450).attr('cy', yScale(300)).attr('r', 20)
+		svg.append('circle').attr('id', 'reye').attr('cx', 550).attr('cy', yScale(300)).attr('r', 20)
+		
+		svg.append('rect').attr('id', 'mask').attr('x', 100).attr('y', yScale(150)).attr('width', 180).attr('height', 100).attr('fill', 'white').attr('stroke', 'black')
+		
+		svg.append('line').attr('id', 'mask1').attr('x1', 75).attr('y1', yScale(175)).attr('x2', 100).attr('y2',yScale(150)).attr('stroke', 'black')
+		svg.append('line').attr('id', 'mask2').attr('x1', 75).attr('y1', yScale(25)).attr('x2', 100).attr('y2',yScale(50)).attr('stroke', 'black')
+		svg.append('line').attr('id', 'mask3').attr('x1', 310).attr('y1', yScale(175)).attr('x2', 280).attr('y2',yScale(150)).attr('stroke', 'black')
+		svg.append('line').attr('id', 'mask4').attr('x1', 310).attr('y1', yScale(25)).attr('x2', 280).attr('y2',yScale(50)).attr('stroke', 'black')
+
+    
+      function blink()
+      {
+          //svg.append('line').attr('x1', 430).attr('x2', 470).attr('y1',yScale(280)).attr('y2', yScale(280)).attr('color', 'green')
+        svg.select('#leye').transition().duration(2500).attr('cx', 440)
+                           .transition().duration(2500).attr('cx', 460)
+                           
+        svg.select('#reye').transition().duration(2500).attr('cx', 540)
+                           .transition().duration(2500).attr('cx', 560)
+                           .on('end', blink)
+      }
+    
+    
+    blink()
+    
+     svg.select('#mask').transition().duration(1000).attr('cx',400).attr('cy',200)
+     
+    function wearMask()
+    {
+      svg.select('#mask').transition().duration(2000).attr('x',410).attr('y',yScale(240))
+      svg.select('#mask1').transition().duration(2000).attr('x1', 350).attr('y1', yScale(260)).attr('x2', 410).attr('y2',yScale(240))
+      svg.select('#mask2').transition().duration(2000).attr('x1', 398).attr('y1', yScale(140)).attr('x2', 410).attr('y2',yScale(140))
+      svg.select('#mask3').transition().duration(2000).attr('x1', 650).attr('y1', yScale(260)).attr('x2', 590).attr('y2',yScale(240))
+      svg.select('#mask4').transition().duration(2000).attr('x1', 602).attr('y1', yScale(140)).attr('x2', 590).attr('y2',yScale(140)).on('end',add)
+    }
+    
+    wearMask()
+    
+    function add(){
+      svg.append('text').attr('id', 'next').attr('x', 100).attr('y',100).text('Next').attr("font-size", "30px")
+      //svg.append('text').attr('x', 100).attr('y',200).text('wear mask keeps yourseld safe')
+    
+    next()
+    }
+    
+  //  avg.append()
+    function next(){
+    d3.select('#next').on('click', function(){
+      svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 500)
+		    .attr('fill', '#f7f2ee')
+		    
+			svg.append('circle').attr('id', 'face_c').attr('cx', 500).attr('cy', yScale(250)).attr('r', 150).attr('fill', 'white').attr('stroke', 'black')
+		    
+      	svg.append('circle').attr('id', 'leeye').attr('cx', 450).attr('cy', yScale(300)).attr('r', 20)
+		svg.append('circle').attr('id', 'rieye').attr('cx', 550).attr('cy', yScale(300)).attr('r', 20)
+		
+		svg.append('line').attr('id', 'nose1').attr('x1', 500).attr('y1', yScale(280)).attr('x2', 530).attr('y2', yScale(230)).attr('stroke', 'black')
+		
+		svg.append('line').attr('id', 'nose2').attr('x1',530 ).attr('y1',yScale(230) ).attr('x2', 500).attr('y2', yScale(210)).attr('stroke', 'black')
+    
+      
+      wearMaskUnderNose()
+    })
+    
+    
+    }
+    
+    function wearMaskUnderNose(){
+      svg.append('rect').attr('id', 'maskk').attr('x', 100).attr('x',410).attr('y',yScale(210)).attr('width', 180).attr('height', 70).attr('fill', 'white').attr('stroke', 'black')
+      svg.append('line').attr('id','mask11').attr('x1', 350).attr('y1', yScale(260)).attr('x2', 410).attr('y2',yScale(210)).attr('stroke', 'black')
+      svg.append('line').attr('id','mask22').attr('x1', 398).attr('y1', yScale(140)).attr('x2', 410).attr('y2',yScale(140)).attr('stroke', 'black')
+      svg.append('line').attr('id','mask33').attr('x1', 650).attr('y1', yScale(260)).attr('x2', 590).attr('y2',yScale(210)).attr('stroke', 'black')
+      svg.append('line').attr('id','mask44').attr('x1', 602).attr('y1', yScale(140)).attr('x2', 590).attr('y2',yScale(140)).attr('stroke', 'black')
+      
+       svg.append('text').attr('x', 100).attr('y',200).text('If you dont cover you nose...').on('end', virus()).attr('font-size','20')
+    }
+    
+    function virus(){
+      svg.append('circle').attr('id', 'virus').attr('cx', 100).attr('cy', yScale(50)).attr('r', 10).attr('fill','red').attr('stroke', 'yellow')
+      
+      windd()
+      
+      svg.select('#virus').transition().duration(1000).attr('cx', 150).attr('cy', yScale(100)).delay(100).transition().duration(1000).attr('cx', 200).attr('cy', yScale(80)).delay(150).transition().duration(1000).attr('cx', 250).attr('cy', yScale(150)).delay(150).transition().duration(1000).attr('cx',300).attr('cy', yScale(125)).transition().duration(1000).attr('cx', 350).attr('cy', yScale(175)).transition().duration(1000).attr('cx', 400).attr('cy', yScale(170)).transition().duration(1000).attr('cx',450).attr('cy', yScale(230)).transition().duration(1000).attr('cx', 510).attr('cy',yScale(230)).on('end', warning)
+    }
+    
+     const curve = d3.line().curve(d3.curveNatural);
+
+     const points1 = [[140, yScale(100)], [190, yScale(80)], [240, yScale(140)], [300, yScale(110)]];
+      
+      const points2 = [[190, yScale(150)], [240, yScale(130)], [290, yScale(190)], [350, yScale(160)]];
+    
+       const points11 = [[140, yScale(130)], [190, yScale(110)], [240, yScale(170)], [300, yScale(140)]];
+      
+      const points22 = [[190, yScale(180)], [240, yScale(160)], [290, yScale(220)], [350, yScale(190)]];
+      
+      const points111 = [[140, yScale(70)], [190, yScale(50)], [240, yScale(110)], [300, yScale(80)]];
+      
+      const points222 = [[190, yScale(120)], [240, yScale(100)], [290, yScale(160)], [350, yScale(130)]];
+      
+      
+     function windd()
+      {
+
+      svg
+      .append('path')
+      .attr('id', 'windpath1')
+      .attr('d', curve(points1))
+      .attr('stroke', 'black')
+      // with multiple points defined, if you leave out fill:none,
+      // the overlapping space defined by the points is filled with
+      // the default value of 'black'
+      .attr('fill', 'none')
+      
+      svg
+      .append('path')
+      .attr('id', 'windpath2')
+      .attr('d', curve(points11))
+      .attr('stroke', 'black')
+      // with multiple points defined, if you leave out fill:none,
+      // the overlapping space defined by the points is filled with
+      // the default value of 'black'
+      .attr('fill', 'none')
+      
+      svg
+      .append('path')
+      .attr('id', 'windpath3')
+      .attr('d', curve(points111))
+      .attr('stroke', 'black')
+      // with multiple points defined, if you leave out fill:none,
+      // the overlapping space defined by the points is filled with
+      // the default value of 'black'
+      .attr('fill', 'none').on('end', movewind())
+      }
+    
+    function movewind(){
+      svg.select('#windpath1').transition().duration(2000)
+      .attr('d', curve(points2)).transition().duration(2000)
+      .attr('d', curve(points1))
+      
+      svg.select('#windpath2').transition().duration(2000)
+      .attr('d', curve(points22)).transition().duration(2000)
+      .attr('d', curve(points11))
+      
+       svg.select('#windpath3').transition().duration(2000)
+      .attr('d', curve(points222)).transition().duration(2000)
+      .attr('d', curve(points111)).on('end', movewind)    
+      
+    }
+    
+    function warning(){
+      
+      svg.append('text').attr('id', 'warning').attr('x', 460).attr('y', yScale(60)).text('Affected!!!').attr('stroke', 'red').attr("font-size", "20px")
+      
+      svg.append('text').attr('id', 'next2').attr('x', 100).attr('y',100).text('Next').attr("font-size", "30px")
+      
+    next2()
+    }
+    
+    function next2(){
+    d3.select('#next2').on('click', function(){
+      
+    svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 500).attr('fill', '#f7f2ee')
+      
+    svg.append('text').attr('x', 110).attr('y', yScale(400)).attr('cx', 100).attr('cy',100).text('Dont forget to change to a new mask or wash it.' ).attr("font-size", "30px").attr('stroke', 'black')
+    
+     svg.append('text').attr('x', 180).attr('y', yScale(360)).attr('cx', 100).attr('cy',100).text('Keep everything clean and sanitized').attr("font-size", "30px").attr('stroke', 'black')
+     
+    svg.append('text').attr('x', 180).attr('y', yScale(320)).attr('cx', 100).attr('cy',100).text('Keep everything clean and sanitized').attr("font-size", "30px").attr('stroke', 'black')
+    
+    svg.append('text').attr('x', 180).attr('y', yScale(280)).attr('cx', 100).attr('cy',100).text('Keep distance, stay safe').attr("font-size", "30px").attr('stroke', 'black')
+    
+    svg.append('text').attr('x', 300).attr('y', yScale(100)).attr('cx', 100).attr('cy',100).text('Covid-19 2020').attr("font-size", "30px").attr('stroke', 'black')
+    
+    
+    })}
+    
+		</script>
+
+	</body>
+
+</html>

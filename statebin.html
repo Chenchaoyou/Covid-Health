@@ -1,12 +1,13 @@
-# Interactive component
+<!DOCTYPE html>
+<meta charset="utf-8">
 
+<body>
+
+<!-- load the d3.js library -->    
 <script src="https://d3js.org/d3.v6.min.js"></script>
 
-<div id='plot'> </div>
-
 <script>
-
-var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1000).attr('height', 600)
+svg = d3.select('body').append('svg').attr('id', 'svg1').attr('width', 1000).attr('height', 600)
 		  
 		svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
 		
@@ -17,7 +18,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
 		var whichstate = 0
 		
     var svg = d3.select('body').select('svg')
-
     start()
     
     function choice(){
@@ -131,7 +131,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
     function showdataCovid(){
        svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
       
-       d3.csv('./NYS_Covid_Case_1128.csv', function(d){
+       d3.csv('NYS_Covid_Case_1128.csv', function(d){
 		  return{
 		    TestDate : d.date,
         County : d.County,
@@ -582,8 +582,8 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr("stroke","black")
         .attr("font-size", "15px") 
         
-        d3.select('#Fulton').on('click', function(){
-          whichstate = 17
+        d3.select('#Franklin').on('click', function(){
+          whichstate = 16
           choice()     
         })         
       
@@ -604,13 +604,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr("stroke","black")
         .attr("font-size", "15px") 
         
-       d3.select('#Genesee').on('click', function(){
-          whichstate = 18
-          choice()     
-        })   
-      
-        
-        
       svg.append("rect")
         .attr("x", 510)
         .attr("y",ys(430))
@@ -627,11 +620,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Greene')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-        
-     d3.select('#Greene').on('click', function(){
-          whichstate = 19
-          choice()     
-        })       
         
         svg.append("rect")
         .attr("x", 30)
@@ -650,12 +638,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr("stroke","black")
         .attr("font-size", "15px") 
         
-          d3.select('#Hamilton').on('click', function(){
-          whichstate = 20
-          choice()     
-        })       
-        
-        
        svg.append("rect")
         .attr("x", 120)
         .attr("y",ys(380))
@@ -672,11 +654,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Herkimer')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-        
-      d3.select('#Herkimer').on('click', function(){
-          whichstate = 21
-          choice()     
-        })       
         
         svg.append("rect")
         .attr("x", 210)
@@ -695,12 +672,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr("stroke","black")
         .attr("font-size", "15px") 
         
-      d3.select('#Jefferson').on('click', function(){
-          whichstate = 22
-          choice()     
-        })   
-        
-        
         svg.append("rect")
         .attr("x", 300)
         .attr("y",ys(380))
@@ -717,11 +688,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Kings')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-        
-  d3.select('#Kings').on('click', function(){
-          whichstate = 23
-          choice()     
-        })  
         
         svg.append("rect")
         .attr("x", 370)
@@ -740,11 +706,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr("stroke","black")
         .attr("font-size", "15px") 
         
-          d3.select('#Lewis').on('click', function(){
-          whichstate = 24
-          choice()     
-        })  
-        
         svg.append("rect")
         .attr("x", 440)
         .attr("y",ys(380))
@@ -761,11 +722,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Livingston')
         .attr("stroke","black")
         .attr("font-size", "15px") 
- 
-      d3.select('#Livingston').on('click', function(){
-          whichstate = 25
-          choice()     
-        })          
+        
        svg.append("rect")
         .attr("x", 540)
         .attr("y",ys(380))
@@ -782,11 +739,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Madison')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-      d3.select('#Madison').on('click', function(){
-          whichstate = 26
-          choice()     
-        })   
         
        svg.append("rect")
         .attr("x", 30)
@@ -804,11 +756,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Monroe')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-      d3.select('#Monroe').on('click', function(){
-          whichstate = 27
-          choice()     
-        })   
         
       svg.append("rect")
         .attr("x", 110)
@@ -826,11 +773,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Montgomery')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-  
-      d3.select('#Montgomery').on('click', function(){
-          whichstate = 28
-          choice()     
-        })           
+        
         
       svg.append("rect")
         .attr("x", 220)
@@ -848,11 +791,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Nassau')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-      d3.select('#Nassau').on('click', function(){
-          whichstate = 29
-          choice()     
-        })   
         
         svg.append("rect")
         .attr("x", 300)
@@ -866,15 +804,10 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
        svg.append("text")
         .attr("x", 308)
         .attr("y",ys(310))
-        .attr('id', 'New_York_City')
+        .attr('id', 'New York City')
         .text('New York City')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-      d3.select('#New_York_City').on('click', function(){
-          whichstate = 30
-          choice()     
-        })   
         
        svg.append("rect")
         .attr("x", 430)
@@ -892,11 +825,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Niagara')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-      d3.select('#Niagara').on('click', function(){
-          whichstate = 31
-          choice()     
-        })    
         
         
       svg.append("rect")
@@ -915,11 +843,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Oneida')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-      d3.select('#Oneida').on('click', function(){
-          whichstate = 32
-          choice()     
-        })   
         
       svg.append("rect")
         .attr("x", 580)
@@ -937,11 +860,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Onondaga')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-  
-      d3.select('#Onondaga').on('click', function(){
-          whichstate = 33
-          choice()     
-        })     
         
        svg.append("rect")
         .attr("x", 30)
@@ -959,11 +877,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Ontario')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-      d3.select('#Ontario').on('click', function(){
-          whichstate = 34
-          choice()     
-        })     
         
       svg.append("rect")
         .attr("x", 110)
@@ -981,11 +894,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Orange')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-      d3.select('#Orange').on('click', function(){
-          whichstate = 35
-          choice()     
-        })  
         
       svg.append("rect")
         .attr("x", 190)
@@ -1003,11 +911,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Orleans')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-      d3.select('#Orleans').on('click', function(){
-          whichstate = 36
-          choice()     
-        })  
         
         svg.append("rect")
         .attr("x", 270)
@@ -1025,11 +928,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Oswego')
         .attr("stroke","black")
         .attr("font-size", "15px") 
- 
-      d3.select('#Oswego').on('click', function(){
-          whichstate = 37
-          choice()     
-        })   
         
       svg.append("rect")
         .attr("x", 350)
@@ -1047,11 +945,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Otsego')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-      d3.select('#Otsego').on('click', function(){
-          whichstate = 38
-          choice()     
-        })   
         
       svg.append("rect")
         .attr("x", 430)
@@ -1069,11 +962,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Putnam')
         .attr("stroke","black")
         .attr("font-size", "15px") 
- 
-       d3.select('#Putnam').on('click', function(){
-          whichstate = 39
-          choice()     
-        })   
         
         svg.append("rect")
         .attr("x", 510)
@@ -1092,11 +980,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr("stroke","black")
         .attr("font-size", "15px") 
         
-        d3.select('#Queens').on('click', function(){
-          whichstate = 40
-          choice()     
-        })   
- 
         svg.append("rect")
         .attr("x", 590)
         .attr("y",ys(280))
@@ -1113,11 +996,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Rensselaer')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-        d3.select('#Rensselaer').on('click', function(){
-          whichstate = 41
-          choice()     
-        })    
         
         svg.append("rect")
         .attr("x", 30)
@@ -1135,12 +1013,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Richmond')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-        d3.select('#Richmond').on('click', function(){
-          whichstate = 42
-          choice()     
-        })    
-
         
        svg.append("rect")
         .attr("x", 130)
@@ -1158,12 +1030,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Rockland')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-
-        d3.select('#Rockland').on('click', function(){
-          whichstate = 43
-          choice()     
-        })           
+        
         
       svg.append("rect")
         .attr("x", 230)
@@ -1177,16 +1044,10 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
        svg.append("text")
         .attr("x", 238)
         .attr("y",ys(210))
-        .attr('id', 'StLawrence')
+        .attr('id', 'St. Lawrence')
         .text('St. Lawrence')
         .attr("stroke","black")
         .attr("font-size", "15px") 
- 
-
-        d3.select('#StLawrence').on('click', function(){
-          whichstate = 44
-          choice()     
-        })    
         
       svg.append("rect")
         .attr("x", 340)
@@ -1204,11 +1065,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Saratoga')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-  
-        d3.select('#Saratoga').on('click', function(){
-          whichstate = 45
-          choice()     
-        })    
         
       svg.append("rect")
         .attr("x", 430)
@@ -1226,11 +1082,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Schenectady')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-        d3.select('#Schenectady').on('click', function(){
-          whichstate = 46
-          choice()     
-        })    
         
        svg.append("rect")
         .attr("x", 540)
@@ -1248,11 +1099,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Schoharie')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-        d3.select('#Schoharie').on('click', function(){
-          whichstate = 47
-          choice()     
-        })    
         
        svg.append("rect")
         .attr("x", 30)
@@ -1270,11 +1116,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Schuyler')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-        d3.select('#Schuyler').on('click', function(){
-          whichstate = 48
-          choice()     
-        })    
         
         svg.append("rect")
         .attr("x", 120)
@@ -1292,11 +1133,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Seneca')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
-        d3.select('#Seneca').on('click', function(){
-          whichstate = 49
-          choice()     
-        })    
         
        svg.append("rect")
         .attr("x", 200)
@@ -1314,11 +1150,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Steuben')
         .attr("stroke","black")
         .attr("font-size", "15px") 
- 
-        d3.select('#Steuben').on('click', function(){
-          whichstate = 50
-          choice()     
-        })     
         
       svg.append("rect")
         .attr("x", 280)
@@ -1336,12 +1167,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Suffolk')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-
- 
-        d3.select('#Suffolk').on('click', function(){
-          whichstate = 51
-          choice()     
-        })    
         
        svg.append("rect")
         .attr("x", 360)
@@ -1359,11 +1184,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Sullivan')
         .attr("stroke","black")
         .attr("font-size", "15px") 
- 
-        d3.select('#Sullivan').on('click', function(){
-          whichstate = 52
-          choice()     
-        })     
         
       svg.append("rect")
         .attr("x", 450)
@@ -1381,12 +1201,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Tioga')
         .attr("stroke","black")
         .attr("font-size", "15px") 
- 
- 
-        d3.select('#Tioga').on('click', function(){
-          whichstate = 53
-          choice()     
-        })   
         
        svg.append("rect")
         .attr("x", 520)
@@ -1404,11 +1218,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Tompkins')
         .attr("stroke","black")
         .attr("font-size", "15px") 
- 
-        d3.select('#Tompkins').on('click', function(){
-          whichstate = 54
-          choice()     
-        })    
         
        svg.append("rect")
         .attr("x", 30)
@@ -1426,12 +1235,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Ulster')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-     
-        d3.select('#Ulster').on('click', function(){
-          whichstate = 55
-          choice()     
-        })    
-
         
       svg.append("rect")
         .attr("x", 100)
@@ -1449,12 +1252,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Warren')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-       
-        d3.select('#Warren').on('click', function(){
-          whichstate = 56
-          choice()     
-        })    
-
         
       svg.append("rect")
         .attr("x", 180)
@@ -1472,11 +1269,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Washington')
         .attr("stroke","black")
         .attr("font-size", "15px") 
- 
-        d3.select('#Washington').on('click', function(){
-          whichstate = 57
-          choice()     
-        })     
         
        svg.append("rect")
         .attr("x", 290)
@@ -1494,11 +1286,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Wayne')
         .attr("stroke","black")
         .attr("font-size", "15px") 
- 
-        d3.select('#Wayne').on('click', function(){
-          whichstate = 58
-          choice()     
-        })      
         
       svg.append("rect")
         .attr("x", 370)
@@ -1516,12 +1303,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Westchester')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-  
-        d3.select('#Westchester').on('click', function(){
-          whichstate = 59
-          choice()     
-        })      
-               
+        
        svg.append("rect")
         .attr("x", 480)
         .attr("y",ys(130))
@@ -1538,11 +1320,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Wyoming')
         .attr("stroke","black")
         .attr("font-size", "15px") 
-    
-        d3.select('#Wyoming').on('click', function(){
-          whichstate = 60
-          choice()     
-        })       
         
        svg.append("rect")
         .attr("x", 575)
@@ -1560,11 +1337,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Yates')
         .attr("stroke","black")
         .attr("font-size", "15px") 
- 
-         d3.select('#Yates').on('click', function(){
-          whichstate = 61
-          choice()     
-        })    
         
         
       svg.append("text")
@@ -1574,7 +1346,16 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .text('Click on name of county to view data')
         .attr("stroke","black")
         .attr("font-size", "30px") 
+        
+           
       
     }
-
+    
+    d3.select('body').append('h1').text('title 2')
+    
+    svg2 = d3.select('body').append('svg').attr('id', 'svg2').attr('width', 1000).attr('height', 600)
+    
+    svg2.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
+        
 </script>
+</body>

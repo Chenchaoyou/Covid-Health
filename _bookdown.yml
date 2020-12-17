@@ -1,8 +1,8 @@
 book_filename: "finalproj"
 output_dir: docs
 delete_merged_file: true
-edit: https://github.com/YOUR Chenchaoyou/Covid-Health/edit/main/%s
-view: https://github.com/YOUR Chenchaoyou/Covid-Health/blob/main/%s
+edit: https://github.com/Chenchaoyou/Covid-Health/edit/main/%s
+view: https://github.com/Chenchaoyou/Covid-Health/blob/main/%s
 language:
   ui:
     chapter_name: "Chapter "

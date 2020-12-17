@@ -1,18 +1,20 @@
 # Results
 
 ```{r packages}
+  library(xts)
   library(rgdal)
   library(dplyr)
   library(leaflet)
   library(readxl)
   library(leaflet.extras)
+  library(dygraphs)
 ```
 
 ## Choropleth Map showing commuter-packed counties and covid cases.
 
 In our exploratory analysis, we discovered that commuters have a positive correlation with the Covid case grow. The following choropleth map shows some interesting patterns:
 
-```{r choropleth}
+```{r work-residence choropleth}
 nys_spdf <- readOGR( 
   dsn= paste0(getwd(),"/dataset/Map/NYS") , 
   layer="cty036",
@@ -83,51 +85,60 @@ info_mar <- info[info$TestDate <= '2020-03-28',]
 monthly <- info_mar %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_mar <-merge(x=info_mar, y=monthly, by.x="County", by.y = "County", all= T)
 info_mar <- as_tibble(info_mar)
+info_mar_select <- info_mar[(info_mar$County == "Chemung")|(info_mar$County == "Yates"),]
 
 info_apr <- info[(info$TestDate > '2020-03-28')&(info$TestDate <= '2020-04-28'),]
 monthly <- info_apr %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_apr <-merge(x=info_apr, y=monthly, by.x="County", by.y = "County", all= T)
 info_apr <- as_tibble(info_apr)
+info_apr_select <- info_apr[(info_apr$County == "Chemung")|(info_apr$County == "Yates"),]
 
 info_may <- info[(info$TestDate > '2020-04-28')&(info$TestDate <= '2020-05-28'),]
 monthly <- info_may %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_may <-merge(x=info_may, y=monthly, by.x="County", by.y = "County", all= T)
 info_may <- as_tibble(info_may)
+info_may_select <- info_may[(info_may$County == "Chemung")|(info_may$County == "Yates"),]
 
 info_jun <- info[(info$TestDate > '2020-05-28')&(info$TestDate <= '2020-06-28'),]
 monthly <- info_jun %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_jun <-merge(x=info_jun, y=monthly, by.x="County", by.y = "County", all= T)
 info_jun <- as_tibble(info_jun)
+info_jun_select <- info_jun[(info_jun$County == "Chemung")|(info_jun$County == "Yates"),]
 
 info_jul <- info[(info$TestDate > '2020-06-28')&(info$TestDate <= '2020-07-28'),]
 monthly <- info_jul %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_jul <-merge(x=info_jul, y=monthly, by.x="County", by.y = "County", all= T)
 info_jul <- as_tibble(info_jul)
+info_jul_select <- info_jul[(info_jul$County == "Chemung")|(info_jul$County == "Yates"),]
 
 info_aug <- info[(info$TestDate > '2020-07-28')&(info$TestDate <= '2020-08-28'),]
 monthly <- info_aug %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_aug <-merge(x=info_aug, y=monthly, by.x="County", by.y = "County", all= T)
 info_aug <- as_tibble(info_aug)
+info_aug_select <- info_aug[(info_aug$County == "Chemung")|(info_aug$County == "Yates"),]
 
 info_sep <- info[(info$TestDate > '2020-08-28')&(info$TestDate <= '2020-09-28'),]
 monthly <- info_sep %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_sep <-merge(x=info_sep, y=monthly, by.x="County", by.y = "County", all= T)
 info_sep <- as_tibble(info_sep)
+info_sep_select <- info_sep[(info_sep$County == "Chemung")|(info_sep$County == "Yates"),]
 
 info_oct <- info[(info$TestDate > '2020-09-28')&(info$TestDate <= '2020-10-28'),]
 monthly <- info_oct %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_oct <-merge(x=info_oct, y=monthly, by.x="County", by.y = "County", all= T)
 info_oct <- as_tibble(info_oct)
+info_oct_select <- info_oct[(info_oct$County == "Chemung")|(info_oct$County == "Yates"),]
 
 info_nov <- info[(info$TestDate > '2020-10-28')&(info$TestDate <= '2020-11-28'),]
 monthly <- info_nov %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_nov <-merge(x=info_nov, y=monthly, by.x="County", by.y = "County", all= T)
 info_nov <- as_tibble(info_nov)
-
+info_nov_select <- info_nov[(info_nov$County == "Chemung")|(info_nov$County == "Yates"),]
 # Construct Leaflet Map
+
 mymap <- leaflet() %>% 
   addProviderTiles("Esri.WorldGrayCanvas",
-                   options = tileOptions(minZoom=6, maxZoom=10)
+                   options = tileOptions(minZoom=7, maxZoom=10)
   )%>%
   addPolygons(data = nys_spdf, 
               fillColor = ~palette(nys_spdf@data$commuter),
@@ -207,7 +218,6 @@ mymap <- leaflet() %>%
     popup = ~ paste0("<b>", County, "</b><br>Monthly Confirmed Cases: <br>", monthly)
   )%>%
   addCircleMarkers(
-    group = "2020-Sep",
     data = info_sep,
     lng = ~long,
     lat = ~lati, 
@@ -239,6 +249,12 @@ mymap <- leaflet() %>%
     stroke = FALSE, 
     popup = ~ paste0("<b>", County, "</b><br>Monthly Confirmed Cases: <br>", monthly)
   )%>%
+  addMarkers(
+    data = info_mar_select,
+    lng = ~long,
+    lat = ~lati, 
+    popup = ~ paste0("<b>", County)
+  )%>%
   addLayersControl(
     baseGroups = c("2020-Mar", "2020-Apr", "2020-May", "2020-Jun", "2020-Jul", "2020-Aug",
                    "2020-Sep", "2020-Oct", "2020-Nov"), 
@@ -267,4 +283,28 @@ mymap <- leaflet() %>%
 mymap  
 ```
 
-The heatmap shows the percentage of labor working outside county of residence. Deeper the color of the county is, the more ratio of workforce commutes outside the county. The teal colored circles represent the number of cumulative cases within each month of 2020. The general pattern indicates and deeper the color is, the more likely that corresponding counties and the surrounding counties experience sharp growth in covid numbers.
+The heatmap shows the percentage of labor working outside county of residence. Deeper the color of the county is, the more ratio of workforce commutes outside the county. The teal colored circles represent the number of cumulative cases within each month of 2020. The general pattern indicates and deeper the color is, the more likely that corresponding county and the surroundings of which experience sharp growth in covid numbers. Comparing the areas of the circles is not an intuitive way to understand the pattern difference. To better understand the difference, we compare two counties marked (Chemung and Yates) that have very different commuter percentages and show their case growth below:
+
+```{r }
+  series <- info[,c('County', 'TestDate', "Cumulative_Positives")]
+  max_county <- "Chemung"
+  min_county <- 'Yates'
+  max_pop <- nys_spdf@data[nys_spdf@data$NAME == 'Chemung',]$POP2000
+  min_pop <- nys_spdf@data[nys_spdf@data$NAME == 'Yates',]$POP2000 
+  ratio <- max_pop/min_pop
+  
+  max_ts <- series[series$County == max_county,]
+  min_ts <- series[series$County == min_county,]
+  max_ts$Chemung <- max_ts$Cumulative_Positives
+  min_ts$Yates_scaled <- round(min_ts$Cumulative_Positives * ratio)
+  min_ts$Yates_true <- min_ts$Cumulative_Positives
+  compare <- merge(x=max_ts, y=min_ts, by.x="TestDate", by.y = "TestDate", all= T)
+  compare <- compare[c('TestDate', 'Chemung', 'Yates_scaled', 'Yates_true')]
+
+  compare_ts <- xts(compare[,-1], order.by=compare$TestDate)
+  dygraph(compare_ts, main='True/Scaled Cumulative Cases of Chemung/Yates County') %>%
+    dyAxis("y", label = "Cumulative Positives") %>%
+    dyAxis("x", label = "Time") 
+```
+
+In this graph, the green plot and the teal plot represents the cumulative postives in Chemung and Yates county respectively. The purple line is the scaled Yates county cases: since the population size of Chemung is roughly 3.6 times the size of Yates, we scaled the case count accordingly. As we observe in the graph, even after we scaled the number of cases, Chemung shows a more rapid growth in covid numbers than Yates does.

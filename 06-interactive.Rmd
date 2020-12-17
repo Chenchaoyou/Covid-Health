@@ -24,42 +24,42 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
     function choice(){
       svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
       
-     svg.append('text').attr('x', 260).attr('y', ys(100)).text('Choose a informtaion you want to know')
+     svg.append('text').attr('x', 230).attr('y', ys(100)).text('Choose informtaion you want to know')
        .attr('font-size', '20px')
        
-       svg.append('text').attr('id', 'CovidTesT').attr('x', 200).attr('y',ys(400)).text('Covid Tests').attr('font-size','25px')
+       svg.append('text').attr('id', 'CovidTesT').attr('x', 130).attr('y',ys(400)).text('Covid Tests').attr('font-size','25px')
 
-       svg.append('circle').attr('cx', 260).attr('cy',ys(320)).attr('r', 20).attr('stroke', 'red').attr('fill', 'yellow')
+       svg.append('circle').attr('cx', 190).attr('cy',ys(320)).attr('r', 20).attr('stroke', 'red').attr('fill', 'yellow')
        
-       svg.append('rect').attr('x', 257.5).attr('y', ys(350)).attr('height', 20).attr('width', 5)
-       svg.append('circle').attr('cx', 260).attr('cy', ys(350)).attr('r', 5).attr('stroke' ,'yellow')
+       svg.append('rect').attr('x', 187.5).attr('y', ys(350)).attr('height', 20).attr('width', 5)
+       svg.append('circle').attr('cx', 190).attr('cy', ys(350)).attr('r', 5).attr('stroke' ,'yellow')
        
-       svg.append('rect').attr('x', 257.5).attr('y', ys(310)).attr('height', 20).attr('width', 5)
-       svg.append('circle').attr('cx', 260).attr('cy', ys(289)).attr('r', 5).attr('stroke' ,'yellow')
+       svg.append('rect').attr('x', 187.5).attr('y', ys(310)).attr('height', 20).attr('width', 5)
+       svg.append('circle').attr('cx', 190).attr('cy', ys(289)).attr('r', 5).attr('stroke' ,'yellow')
        
-       svg.append('rect').attr('x', 228).attr('y', ys(320.5)).attr('height', 5).attr('width', 20)
+       svg.append('rect').attr('x', 158).attr('y', ys(320.5)).attr('height', 5).attr('width', 20)
        svg.append('circle').attr('cx', 228).attr('cy', ys(318)).attr('r', 5).attr('stroke' ,'yellow')
        
-       svg.append('rect').attr('x', 273.5).attr('y', ys(320.5)).attr('height', 5).attr('width', 20)
-       svg.append('circle').attr('cx', 295).attr('cy', ys(318.5)).attr('r', 5).attr('stroke' ,'yellow')
+       svg.append('rect').attr('x', 203.5).attr('y', ys(320.5)).attr('height', 5).attr('width', 20)
+       svg.append('circle').attr('cx', 155).attr('cy', ys(318.5)).attr('r', 5).attr('stroke' ,'yellow')
        
        
-       svg.append('rect').attr('x', 450).attr('y', ys(360)).attr('height', 80).attr('width', 20).attr('fill', 'blue')
-       svg.append('rect').attr('x', 485).attr('y', ys(340)).attr('height', 60).attr('width', 20).attr('fill', 'red')
+       svg.append('rect').attr('x', 370).attr('y', ys(360)).attr('height', 80).attr('width', 20).attr('fill', 'blue')
+       svg.append('rect').attr('x', 400).attr('y', ys(340)).attr('height', 60).attr('width', 20).attr('fill', 'red')
         
-         svg.append('text').attr('id', 'Election').attr('x', 400).attr('y', ys(400)).text('Elevtion Voting').attr('font-size', '25px')
+         svg.append('text').attr('id', 'Electiondata').attr('x', 315).attr('y', ys(400)).text('Elevtion Voting').attr('font-size', '25px')
          
-         svg.append('text').attr('id','Residencedata').attr('x', 600).attr('y', ys(400)).text('Work Residence').attr('font-size', '25px')
+         svg.append('text').attr('id','Residencedata').attr('x', 530).attr('y', ys(400)).text('Work Residence').attr('font-size', '25px')
         
-        svg.append('rect').attr('x', 650).attr('y', ys(340)).attr('height',60).attr('width', 60).attr('fill', "white").attr('stroke', 'black')
+        svg.append('rect').attr('x', 600).attr('y', ys(340)).attr('height',60).attr('width', 60).attr('fill', "white").attr('stroke', 'black')
         
-        svg.append('line').attr('x1', 650).attr('y1', ys(340)).attr('x2', 680).attr('y2', ys(370)).attr('stroke', 'black')
+        svg.append('line').attr('x1', 600).attr('y1', ys(340)).attr('x2', 630).attr('y2', ys(370)).attr('stroke', 'black')
         
-        svg.append('line').attr('x1', 710).attr('y1', ys(340)).attr('x2', 680).attr('y2', ys(370)).attr('stroke', 'black')
+        svg.append('line').attr('x1', 660).attr('y1', ys(340)).attr('x2', 630).attr('y2', ys(370)).attr('stroke', 'black')
         
-        svg.append('rect').attr('x', 660).attr('y', ys(310)).attr('height',30).attr('width', 20).attr('fill', "white").attr('stroke', 'black')
+        svg.append('rect').attr('x', 620).attr('y', ys(310)).attr('height',30).attr('width', 20).attr('fill', "white").attr('stroke', 'black')
         
-        svg.append('circle').attr('cx', 665).attr('cy', ys(290)).attr('r', 2)
+        svg.append('circle').attr('cx', 625).attr('cy', ys(290)).attr('r', 2)
         
          
         d3.select('#CovidTesT').on('click', function(){
@@ -124,6 +124,42 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
     }
     
     function showdataElection(){
+      var i = whichstate
+      
+      svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
+         
+      
+      
+      const ys = d3.scaleLinear()
+	  	 .domain([0, 600])
+         .range([600, 0]);
+        
+d3.csv('President2020.csv').then(function(d){
+         
+         
+svg.append('text').attr('x', 160).attr('y', ys(540)).text('Election vote in 2020 in '+ d[i]['County']).attr('font-size', '20px')
+
+var Bidenvote = parseInt(d[i]['Biden(DEM)'])+parseInt(d[i]['Biden(WOR)'] )
+var Trumpvote = parseInt(d[i]['Trump(REP)'])+parseInt(d[i]['Trump(CON)'])
+
+         
+var max = d3.max([Bidenvote, Trumpvote])
+	       
+var ys2 = d3.scaleLinear()
+	  	   .domain([0, max])
+         .range([0, 400]);
+	        
+	        svg.append('text').attr('x', 180).attr('y', ys(80)).text('Biden').attr('font-size','20px')
+	        svg.append('text').attr('x', 280).attr('y', ys(80)).text(' Trump').attr('font-size','20px')
+	        
+	        svg.append('rect').attr('x', 180).attr('y', 500-ys2(Bidenvote)).attr('height', ys2(Bidenvote)).attr('width', 60).attr('fill', 'Blue')
+	        svg.append('rect').attr('x', 280).attr('y', 500 - ys2(Trumpvote)).attr('height', ys2(Trumpvote)).attr('width', 60).attr('fill', 'red')
+	         
+	        svg.append('text').attr('x', 190).attr('y', 490-ys2(Bidenvote)).text(Bidenvote)
+	        
+	        svg.append('text').attr('x', 290).attr('y', 490-ys2(Trumpvote)).text(Trumpvote)
+           
+         })
       
       
       
@@ -210,16 +246,16 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         })
         
         svg.append("rect")
-        .attr("x",190)
+        .attr("x",185)
         .attr("y",ys(530))
         .attr('id', 'Bronx1')
         .attr('height', 30)
-        .attr('width', 50)
+        .attr('width', 60)
         .attr('fill', 'white')
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x",198)
+        .attr("x",195)
         .attr("y",ys(510))
         .attr('id', 'Bronx')
         .text('Bronx')
@@ -268,7 +304,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x",353)
+        .attr("x",350)
         .attr("y",ys(510))
         .attr('id', 'Cattaraugus')
         .text('Cattaraugus')
@@ -292,7 +328,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 463)
+        .attr("x", 460)
         .attr("y",ys(510))
         .attr('id', 'Cayuga')
         .text('Cayuga')
@@ -318,7 +354,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 543)
+        .attr("x", 540)
         .attr("y",ys(510))
         .attr('id', 'Chautauqua')
         .text('Chautauqua')
@@ -344,7 +380,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 38)
+        .attr("x", 35)
         .attr("y",ys(460))
         .attr('id', 'Chemung')
         .text('Chemung')
@@ -369,7 +405,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 133)
+        .attr("x", 130)
         .attr("y",ys(460))
         .attr('id', 'Chenango')
         .text('Chenango')
@@ -466,7 +502,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 498)
+        .attr("x", 495)
         .attr("y",ys(460))
         .attr('id', 'Delaware')
         .text('Delaware')
@@ -488,7 +524,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 38)
+        .attr("x", 35)
         .attr("y",ys(410))
         .attr('id', 'Dutchess')
         .text('Dutchess')
@@ -532,7 +568,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 188)
+        .attr("x", 185)
         .attr("y",ys(410))
         .attr('id', 'Essex')
         .text('Essex')
@@ -598,7 +634,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 428)
+        .attr("x", 425)
         .attr("y",ys(410))
         .attr('id', 'Genesee')
         .text('Genesee')
@@ -622,7 +658,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 518)
+        .attr("x", 515)
         .attr("y",ys(410))
         .attr('id', 'Greene')
         .text('Greene')
@@ -644,7 +680,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 38)
+        .attr("x", 35)
         .attr("y",ys(360))
         .attr('id', 'Hamilton')
         .text('Hamilton')
@@ -667,7 +703,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 128)
+        .attr("x", 125)
         .attr("y",ys(360))
         .attr('id', 'Herkimer')
         .text('Herkimer')
@@ -689,7 +725,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 218)
+        .attr("x", 215)
         .attr("y",ys(360))
         .attr('id', 'Jefferson')
         .text('Jefferson')
@@ -712,7 +748,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 308)
+        .attr("x", 305)
         .attr("y",ys(360))
         .attr('id', 'Kings')
         .text('Kings')
@@ -734,7 +770,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 378)
+        .attr("x", 375)
         .attr("y",ys(360))
         .attr('id', 'Lewis')
         .text('Lewis')
@@ -756,7 +792,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 448)
+        .attr("x", 445)
         .attr("y",ys(360))
         .attr('id', 'Livingston')
         .text('Livingston')
@@ -799,7 +835,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 38)
+        .attr("x", 35)
         .attr("y",ys(310))
         .attr('id', 'Monroe')
         .text('Monroe')
@@ -821,7 +857,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 118)
+        .attr("x", 112)
         .attr("y",ys(310))
         .attr('id', 'Montgomery')
         .text('Montgomery')
@@ -843,7 +879,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 228)
+        .attr("x", 225)
         .attr("y",ys(310))
         .attr('id', 'Nassau')
         .text('Nassau')
@@ -887,7 +923,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 438)
+        .attr("x", 435)
         .attr("y",ys(310))
         .attr('id', 'Niagara')
         .text('Niagara')
@@ -910,7 +946,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 518)
+        .attr("x", 515)
         .attr("y",ys(310))
         .attr('id', 'Oneida')
         .text('Oneida')
@@ -932,7 +968,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 588)
+        .attr("x", 585)
         .attr("y",ys(310))
         .attr('id', 'Onondaga')
         .text('Onondaga')
@@ -954,7 +990,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 38)
+        .attr("x", 35)
         .attr("y",ys(260))
         .attr('id', 'Ontario')
         .text('Ontario')
@@ -976,7 +1012,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 118)
+        .attr("x", 115)
         .attr("y",ys(260))
         .attr('id', 'Orange')
         .text('Orange')
@@ -998,7 +1034,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 198)
+        .attr("x", 195)
         .attr("y",ys(260))
         .attr('id', 'Orleans')
         .text('Orleans')
@@ -1020,7 +1056,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 278)
+        .attr("x", 273)
         .attr("y",ys(260))
         .attr('id', 'Oswego')
         .text('Oswego')
@@ -1064,7 +1100,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 438)
+        .attr("x", 435)
         .attr("y",ys(260))
         .attr('id', 'Putnam')
         .text('Putnam')
@@ -1086,7 +1122,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 518)
+        .attr("x", 515)
         .attr("y",ys(260))
         .attr('id', 'Queens')
         .text('Queens')
@@ -1108,7 +1144,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 598)
+        .attr("x", 593)
         .attr("y",ys(260))
         .attr('id', 'Rensselaer')
         .text('Rensselaer')
@@ -1130,7 +1166,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 38)
+        .attr("x", 35)
         .attr("y",ys(210))
         .attr('id', 'Richmond')
         .text('Richmond')
@@ -1171,12 +1207,12 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr("y",ys(230))
         .attr('id', 'St. Lawrence1')
         .attr('height', 30)
-        .attr('width', 90)
+        .attr('width', 98)
         .attr('fill', 'white')
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 238)
+        .attr("x", 235)
         .attr("y",ys(210))
         .attr('id', 'StLawrence')
         .text('St. Lawrence')
@@ -1199,7 +1235,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 348)
+        .attr("x", 345)
         .attr("y",ys(210))
         .attr('id', 'Saratoga')
         .text('Saratoga')
@@ -1216,12 +1252,12 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr("y",ys(230))
         .attr('id', 'Schenectady1')
         .attr('height', 30)
-        .attr('width', 90)
+        .attr('width', 95)
         .attr('fill', 'white')
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 438)
+        .attr("x", 435)
         .attr("y",ys(210))
         .attr('id', 'Schenectady')
         .text('Schenectady')
@@ -1238,12 +1274,12 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr("y",ys(230))
         .attr('id', 'Schoharie1')
         .attr('height', 30)
-        .attr('width', 70)
+        .attr('width', 75)
         .attr('fill', 'white')
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 548)
+        .attr("x", 545)
         .attr("y",ys(210))
         .attr('id', 'Schoharie')
         .text('Schoharie')
@@ -1265,7 +1301,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 38)
+        .attr("x", 35)
         .attr("y",ys(160))
         .attr('id', 'Schuyler')
         .text('Schuyler')
@@ -1287,7 +1323,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 128)
+        .attr("x", 125)
         .attr("y",ys(160))
         .attr('id', 'Seneca')
         .text('Seneca')
@@ -1304,12 +1340,12 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr("y",ys(180))
         .attr('id', 'Steuben1')
         .attr('height', 30)
-        .attr('width', 60)
+        .attr('width', 65)
         .attr('fill', 'white')
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 208)
+        .attr("x", 205)
         .attr("y",ys(160))
         .attr('id', 'Steuben')
         .text('Steuben')
@@ -1421,7 +1457,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 38)
+        .attr("x", 35)
         .attr("y",ys(110))
         .attr('id', 'Ulster')
         .text('Ulster')
@@ -1467,7 +1503,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 188)
+        .attr("x", 185)
         .attr("y",ys(110))
         .attr('id', 'Washington')
         .text('Washington')
@@ -1506,12 +1542,12 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         .attr("y",ys(130))
         .attr('id', 'Westchester1')
         .attr('height', 30)
-        .attr('width', 90)
+        .attr('width', 95)
         .attr('fill', 'white')
         .attr('stroke', 'black')
         
        svg.append("text")
-        .attr("x", 378)
+        .attr("x", 375)
         .attr("y",ys(110))
         .attr('id', 'Westchester')
         .text('Westchester')

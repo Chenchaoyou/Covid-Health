@@ -16,6 +16,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
 		
 		var whichstate = 0
 		
+		
     var svg = d3.select('body').select('svg')
 
     start()
@@ -131,7 +132,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
     function showdataCovid(){
        svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
       
-       d3.csv('./NYS_Covid_Case_1128.csv', function(d){
+       d3.csv('NYS_Covid_Case_1128.csv', function(d){
 		  return{
 		    TestDate : d.date,
         County : d.County,

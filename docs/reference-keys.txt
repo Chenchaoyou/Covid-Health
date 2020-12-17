@@ -5,6 +5,10 @@ missing-values
 political-data-missing-values
 income-data-missing-values
 results
+work-residence-data-and-covid-case-growth
 choropleth-map-showing-commuter-packed-counties-and-covid-cases.
+time-series-comparison-between-two-counties-covid-growth
+income-data-and-covid-case-growth
+scatterplot-showing-covid-positive-rate-and-poverty-rate
 interactive-component
 conclusion

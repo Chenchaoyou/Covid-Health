@@ -20,7 +20,7 @@ Political Data, namely the 2020 and 2016 presidential election results data, are
 
 Geographic Data is the NYS map in the form of shapefile, which is ready to be used in mapping variables to counties.
 
-Economic Data are collected from <b>US Census Bureau</b> (https://data.census.gov/cedsci/) under the keyword INCOME/POVERTY. The data shows number of population of different age groups determined to be under poverty by county reports.
+Economic Data are collected from <b>US Census Bureau</b> (https://data.census.gov/cedsci/) under the keyword INCOME/POVERTY. The data shows total number of population and population determined to be under poverty by county reports.
 
 Demographic Data are gathered from <b>US Census Bureau</b> (https://data.census.gov/cedsci/) under the keyword race. We chose the more general race data over the specific detailed race subgroup count, because we believe that race subgroups are too detailed for observing patterns in the exploratory data analysis. The dataset consists of race counts by counties. There are 62 rows of data each corresponding to a county.
 

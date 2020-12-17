@@ -1,10 +1,5 @@
 # Interactive component
 
-```{r setup, include=FALSE}
-library(r2d3)
-knitr::opts_chunk$set(echo=FALSE, comment=NA)
-```
-
 <script src="https://d3js.org/d3.v6.min.js"></script>
 
 <div id='plot'> </div>
@@ -80,15 +75,13 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         })
         
     }
-    ```{d3 d = read.csv("Work_Residence.csv")}
+    
     function showdataResidence(){
           var i = whichstate
-
-
-     
+      
       svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
          
-       // d3.csv('Work_Residence.csv').then(function(d){
+        d3.csv('Work_Residence.csv').then(function(d){
          
 	       svg.append('text').attr('x', 160).attr('y', ys(540)).text('Work Residence Statistics for NYS in '+ d[i]['Geographic']).attr('font-size', '20px')
         var Totallabor = parseInt(d[i]['Total_Labor'])
@@ -127,11 +120,11 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
 	        
 	        svg.append('text').attr('x', 320).attr('y', 490-ys2(noresidence)).text(noresidence)
            
-   // })
+    })
       
       
     }
-```    
+    
 function showdataElection()
 {
 var i = whichstate

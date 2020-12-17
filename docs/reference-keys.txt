@@ -10,5 +10,8 @@ choropleth-map-showing-commuter-packed-counties-and-covid-cases.
 time-series-comparison-between-two-counties-covid-growth
 income-data-and-covid-case-growth
 scatterplot-showing-covid-positive-rate-and-poverty-rate
+race-data-and-covid-case-growth
+biased-racial-data
+scatterplots-showing-correlation-between-race-and-covid-case-growth-inoutside-metropolitan-areas
 interactive-component
 conclusion

@@ -16,7 +16,7 @@ Six different datasets corresponding to five factor variables plus one dependent
 
 Health Data is collected through <b>State of New York Open Data</b> (https://data.ny.gov/) under the Covid-19 Tag. The dataset consists of new/cumulative positive cases of Covid and new/cumulative test numbers gathered by date and by counties. A total of 16926 rows are reported.
 
-Political Data, namely the 2020 election results data, are gathered through <b>NYS Board of Elections</b> (https://www.elections.ny.gov). The data records number of voters who voted for different presidential candidate by each county. A total of 64 rows of data are reported (62 counties + total vote by candidate + total vote by party).
+Political Data, namely the 2020 and 2016 presidential election results data, are gathered through <b>NYS Board of Elections</b> (https://www.elections.ny.gov). The data records number of voters who voted for different presidential candidate by each county. A total of 64 rows of data are reported (62 counties + total vote by candidate + total vote by party). 
 
 Geographic Data is the NYS map in the form of shapefile, which is ready to be used in mapping variables to counties.
 

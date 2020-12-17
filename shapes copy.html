@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+		<script src="https://d3js.org/d3.v6.js"></script>  
+		
+		<script>
+
+var i = 5
+var svg = d3.select('body').append('svg').attr('id', 'svg1').attr('width', 1000).attr('height', 600)
+
+svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
+        
+        
+const ys = d3.scaleLinear()
+	  	 .domain([0, 600])
+         .range([600, 0]);
+        
+d3.csv('President2020.csv').then(function(d){
+         
+         
+svg.append('text').attr('x', 160).attr('y', ys(540)).text('Election vote in 2020 in '+ d[i]['County']).attr('font-size', '20px')
+
+var Bidenvote = parseInt(d[i]['Biden(DEM)'])+parseInt(d[i]['Biden(WOR)'] )
+var Trumpvote = parseInt(d[i]['Trump(REP)'])+parseInt(d[i]['Trump(CON)'])
+
+         
+var max = d3.max([Bidenvote, Trumpvote])
+	       
+var ys2 = d3.scaleLinear()
+	  	   .domain([0, max])
+         .range([0, 400]);
+	        
+	        svg.append('text').attr('x', 180).attr('y', ys(80)).text('Biden').attr('font-size','20px')
+	        svg.append('text').attr('x', 280).attr('y', ys(80)).text(' Trump').attr('font-size','20px')
+	        
+	        svg.append('rect').attr('x', 180).attr('y', 500-ys2(Bidenvote)).attr('height', ys2(Bidenvote)).attr('width', 60).attr('fill', 'Blue')
+	        svg.append('rect').attr('x', 280).attr('y', 500 - ys2(Trumpvote)).attr('height', ys2(Trumpvote)).attr('width', 60).attr('fill', 'red')
+	         
+	        svg.append('text').attr('x', 190).attr('y', 490-ys2(Bidenvote)).text(Bidenvote)
+	        
+	        svg.append('text').attr('x', 290).attr('y', 490-ys2(Trumpvote)).text(Trumpvote)
+           
+         })
+	
+		</script>
+
+	</body>
+
+</html>

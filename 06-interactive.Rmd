@@ -1,5 +1,11 @@
 # Interactive component
 
+```{r setup}
+library(r2d3)
+```
+
+
+
 <script src="https://d3js.org/d3.v6.min.js"></script>
 
 <div id='plot'> </div>
@@ -81,7 +87,9 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
       
       svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
          
-        d3.csv('Work_Residence.csv').then(function(d){
+        d3.csv('https://raw.githubusercontent.com/Chenchaoyou/Covid-Health/main/Work_Residence.csv').then(function(d){
+        
+        
          
 	       svg.append('text').attr('x', 160).attr('y', ys(540)).text('Work Residence Statistics for NYS in '+ d[i]['Geographic']).attr('font-size', '20px')
         var Totallabor = parseInt(d[i]['Total_Labor'])
@@ -131,7 +139,7 @@ var i = whichstate
       
 svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
       
-d3.csv('President2020.csv').then(function(d){
+d3.csv('https://raw.githubusercontent.com/Chenchaoyou/Covid-Health/main/President2020.csv').then(function(d){
          
          
 svg.append('text').attr('x', 160).attr('y', ys(540)).text('Election vote in 2020 in '+ d[i]['County']).attr('font-size', '20px')
@@ -163,7 +171,7 @@ var ys2 = d3.scaleLinear()
     
        svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
       
-      d3.csv('NYS_Covid_Case_1128.csv', function(d){
+      d3.csv('https://raw.githubusercontent.com/Chenchaoyou/Covid-Health/main/NYS_Covid_Case_1128.csv', function(d){
 		  return{
 		    TestDate : d.date,
         County : d.County,

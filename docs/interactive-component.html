@@ -50,13 +50,6 @@
 
 
 
-<<<<<<< HEAD
-<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
-<script src="libs/r2d3-render-0.1.0/r2d3-render.js"></script>
-<script src="libs/webcomponents-2.0.0/webcomponents.js"></script>
-<script src="libs/r2d3-binding-0.2.3/r2d3.js"></script>
-<script src="libs/d3v5-5.0.0/d3.min.js"></script>
-=======
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
@@ -81,7 +74,6 @@
 <script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
 <script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
 <script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
->>>>>>> ce9f3695b4c4786179fb034a58b60d502ff59b86
 
 
 
@@ -109,7 +101,17 @@
 <li class="chapter" data-level="4.2" data-path="missing-values.html"><a href="missing-values.html#income-data-missing-values"><i class="fa fa-check"></i><b>4.2</b> Income Data Missing Values</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
-<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#choropleth-map-showing-commuter-packed-counties-and-covid-cases."><i class="fa fa-check"></i><b>5.1</b> Choropleth Map showing commuter-packed counties and covid cases.</a></li>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#work-residence-data-and-covid-case-growth"><i class="fa fa-check"></i><b>5.1</b> Work-Residence Data and Covid Case Growth</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="results.html"><a href="results.html#choropleth-map-showing-commuter-packed-counties-and-covid-cases."><i class="fa fa-check"></i><b>5.1.1</b> Choropleth Map showing Commuter-packed Counties and Covid Cases.</a></li>
+<li class="chapter" data-level="5.1.2" data-path="results.html"><a href="results.html#time-series-comparison-between-two-counties-covid-growth"><i class="fa fa-check"></i><b>5.1.2</b> Time Series Comparison between Two Counties Covid Growth</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#income-data-and-covid-case-growth"><i class="fa fa-check"></i><b>5.2</b> Income Data and Covid Case Growth</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="results.html"><a href="results.html#scatterplot-showing-covid-positive-rate-and-poverty-rate"><i class="fa fa-check"></i><b>5.2.1</b> Scatterplot showing Covid Positive Rate and Poverty Rate</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#race-data-and-covid-case-growth"><i class="fa fa-check"></i><b>5.3</b> Race Data and Covid Case Growth</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="results.html"><a href="results.html#biased-racial-data"><i class="fa fa-check"></i><b>5.3.1</b> Biased Racial Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="results.html"><a href="results.html#scatterplots-showing-correlation-between-race-and-covid-case-growth-inoutside-metropolitan-areas"><i class="fa fa-check"></i><b>5.3.2</b> Scatterplots Showing Correlation Between Race and Covid Case Growth in/outside Metropolitan Areas</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -209,10 +211,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
         })
         
     }
-<<<<<<< HEAD
-    <div id="htmlwidget-4999665af7e13db9fe0b" style="width:672px;height:480px;" class="r2d3 html-widget"></div>
-    <script type="application/json" data-for="htmlwidget-4999665af7e13db9fe0b">{"x":{"data":null,"type":"NULL","container":"svg","options":null,"script":"var d3Script = function(d3, r2d3, data, svg, width, height, options, theme, console) {\nthis.d3 = d3;\n\nsvg = d3.select(svg.node());\nfunction showdataResidence(){\n      var i = whichstate\n\n\n \n  svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')\n     \n   // d3.csv('Work_Residence.csv').then(function(d){\n     \n\t       svg.append('text').attr('x', 160).attr('y', ys(540)).text('Work Residence Statistics for NYS in '+ d[i]['Geographic']).attr('font-size', '20px')\n    var Totallabor = parseInt(d[i]['Total_Labor'])\n    var Withresidence = parseInt(d[i]['With_Residence'])\n    var Workin = parseInt(d[i]['Work_in_PoR'])\n     var Workout = parseInt(d[i]['Worked_outside_PoR'])\n     var noresidence = parseInt(d[i]['No_Residence'])\n     \n     \n\t       var max = d3.max([Withresidence, Workin, Workout, noresidence])\n\t       \n\t       var ys2 = d3.scaleLinear()\n\t  \t   .domain([0, max])\n     .range([0, 400]);\n\t        \n\t        svg.append('text').attr('x', 450).attr('y', ys(400)).text('Totle Labor : ' + Totallabor).attr('font-size', '25px')\n\t        \n\t        svg.append('text').attr('x', 150).attr('y', ys(80)).text('With Residence')\n\t        svg.append('text').attr('x', 290).attr('y', ys(80)).text('No Residence')\n\t        \n\t        svg.append('rect').attr('x', 180).attr('y', 500-ys2(Withresidence)).attr('height', ys2(Withresidence)).attr('width', 60).attr('fill', 'lightgreen')\n\t        svg.append('rect').attr('x', 310).attr('y', 500 - ys2(noresidence)).attr('height', ys2(noresidence)).attr('width', 60).attr('fill', 'grey')\n\t        svg.append('rect').attr('x', 180).attr('y', 500-ys2(Workin)).attr('height', ys2(Workin)).attr('width', 60).attr('fill', 'lightblue')\n\t        \n\t        svg.append('text').attr('x', 190).attr('y', 500-ys2(Workin)).text(Workin)\n\t        svg.append('text').attr('x', 50).attr('y', ys(140)).text('Worked in')\n\t       svg.append('text').attr('x', 50).attr('y', ys(120)).text('County of')\n\t       svg.append('text').attr('x', 50).attr('y', ys(100)).text('Residence')\n\t         \n\t       svg.append('text').attr('x', 35).attr('y', ys(480)).text('Worked Outside')\n\t       svg.append('text').attr('x', 50).attr('y', ys(460)).text('County of')\n\t       svg.append('text').attr('x', 50).attr('y', ys(440)).text('Residence')\n\t         \n\t         \n\t        svg.append('text').attr('x', 190).attr('y', 490-ys2(Withresidence)).text(Withresidence)\n\t        \n\t        svg.append('text').attr('x', 320).attr('y', 490-ys2(noresidence)).text(noresidence)\n       \n   // })\n  \n  \n}\n};","style":null,"version":5,"theme":{"default":{"background":"#FFFFFF","foreground":"#000000"},"runtime":null},"useShadow":true},"evals":[],"jsHooks":[]}</script>
-=======
     
     function showdataResidence(){
           var i = whichstate
@@ -263,7 +261,6 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
       
     }
     
->>>>>>> ce9f3695b4c4786179fb034a58b60d502ff59b86
 function showdataElection()
 {
 var i = whichstate
@@ -1745,14 +1742,10 @@ var ys2 = d3.scaleLinear()
       
     }
 
-<<<<<<< HEAD
 
 
 </script>
 <p><a href="./mask.html">this link</a></p>
-=======
-</script>
->>>>>>> ce9f3695b4c4786179fb034a58b60d502ff59b86
 
 </div>
             </section>

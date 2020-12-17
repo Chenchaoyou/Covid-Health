@@ -1,2 +1,5 @@
 # Conclusion
 
+We have conduct exploratory analysis that investigated some social and economic data and their possible correlation with covid case growth. Since the analysis is early and exploratory, there are still more to research if we want to imply a causation or to offer policy-making suggestions. For example, we want to design a comparison to control variates if we want to imply a causation between a certain variable and covid case growth. An A/B test or other hypothesis testing are needed to establish solid results.
+
+More over, due to the limited amount of time we have on this project, we did not split the data into groups of county inside/near or outside New York metropolitan area. In our study we have discovered that those two groups of county have distinct patterns within each group. For example, in our scatterplot showing covid-poverty correaltions, the correlation is not strong in general but a correlation exists if we look at each group of counties individually. A direction to investigate in the future is to split the dataset into the two groups said and visualize any patterns we can find for each group. 

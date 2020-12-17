@@ -2,9 +2,9 @@ introduction
 data-sources
 data-transformation
 missing-values
-results
-interactive-component
-conclusion
 political-data-missing-values
 income-data-missing-values
+results
 choropleth-map-showing-commuter-packed-counties-and-covid-cases.
+interactive-component
+conclusion

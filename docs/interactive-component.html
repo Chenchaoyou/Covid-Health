@@ -21,10 +21,10 @@
   
   
 
-<meta name="author" content="Final Project Group" />
+<meta name="author" content="Final Project Group 23, Junzhi Ge, Natasha McLeod, Chenchao You" />
 
 
-<meta name="date" content="2020-12-05" />
+<meta name="date" content="2020-12-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,9 +50,11 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/r2d3-render-0.1.0/r2d3-render.js"></script>
+<script src="libs/webcomponents-2.0.0/webcomponents.js"></script>
+<script src="libs/r2d3-binding-0.2.3/r2d3.js"></script>
+<script src="libs/d3v5-5.0.0/d3.min.js"></script>
 
 
 
@@ -75,8 +77,13 @@
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a><ul>
+<li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#political-data-missing-values"><i class="fa fa-check"></i><b>4.1</b> Political Data Missing Values</a></li>
+<li class="chapter" data-level="4.2" data-path="missing-values.html"><a href="missing-values.html#income-data-missing-values"><i class="fa fa-check"></i><b>4.2</b> Income Data Missing Values</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#choropleth-map-showing-commuter-packed-counties-and-covid-cases."><i class="fa fa-check"></i><b>5.1</b> Choropleth Map showing commuter-packed counties and covid cases.</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
@@ -100,6 +107,1568 @@
             <section class="normal" id="section-">
 <div id="interactive-component" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Interactive component</h1>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<div id="plot">
+
+</div>
+<script>
+
+var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1000).attr('height', 600)
+          
+        svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
+        
+        const ys = d3.scaleLinear()
+         .domain([0, 600])
+         .range([600, 0]);
+        
+        var whichstate = 0
+        
+        
+    var svg = d3.select('body').select('svg')
+
+    start()
+    
+    function choice(){
+      svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
+      
+     svg.append('text').attr('x', 230).attr('y', ys(100)).text('Choose informtaion you want to know')
+       .attr('font-size', '20px')
+       
+       svg.append('text').attr('id', 'CovidTesT').attr('x', 130).attr('y',ys(400)).text('Covid Tests').attr('font-size','25px')
+
+       svg.append('circle').attr('cx', 190).attr('cy',ys(320)).attr('r', 20).attr('stroke', 'red').attr('fill', 'yellow')
+       
+       svg.append('rect').attr('x', 187.5).attr('y', ys(350)).attr('height', 20).attr('width', 5)
+       svg.append('circle').attr('cx', 190).attr('cy', ys(350)).attr('r', 5).attr('stroke' ,'yellow')
+       
+       svg.append('rect').attr('x', 187.5).attr('y', ys(310)).attr('height', 20).attr('width', 5)
+       svg.append('circle').attr('cx', 190).attr('cy', ys(289)).attr('r', 5).attr('stroke' ,'yellow')
+       
+       svg.append('rect').attr('x', 158).attr('y', ys(320.5)).attr('height', 5).attr('width', 20)
+       svg.append('circle').attr('cx', 228).attr('cy', ys(318)).attr('r', 5).attr('stroke' ,'yellow')
+       
+       svg.append('rect').attr('x', 203.5).attr('y', ys(320.5)).attr('height', 5).attr('width', 20)
+       svg.append('circle').attr('cx', 155).attr('cy', ys(318.5)).attr('r', 5).attr('stroke' ,'yellow')
+       
+       
+       svg.append('rect').attr('x', 370).attr('y', ys(360)).attr('height', 80).attr('width', 20).attr('fill', 'blue')
+       svg.append('rect').attr('x', 400).attr('y', ys(340)).attr('height', 60).attr('width', 20).attr('fill', 'red')
+        
+         svg.append('text').attr('id', 'Electiondata').attr('x', 315).attr('y', ys(400)).text('Elevtion Voting').attr('font-size', '25px')
+         
+         svg.append('text').attr('id','Residencedata').attr('x', 530).attr('y', ys(400)).text('Work Residence').attr('font-size', '25px')
+        
+        svg.append('rect').attr('x', 600).attr('y', ys(340)).attr('height',60).attr('width', 60).attr('fill', "white").attr('stroke', 'black')
+        
+        svg.append('line').attr('x1', 600).attr('y1', ys(340)).attr('x2', 630).attr('y2', ys(370)).attr('stroke', 'black')
+        
+        svg.append('line').attr('x1', 660).attr('y1', ys(340)).attr('x2', 630).attr('y2', ys(370)).attr('stroke', 'black')
+        
+        svg.append('rect').attr('x', 620).attr('y', ys(310)).attr('height',30).attr('width', 20).attr('fill', "white").attr('stroke', 'black')
+        
+        svg.append('circle').attr('cx', 625).attr('cy', ys(290)).attr('r', 2)
+        
+         
+        d3.select('#CovidTesT').on('click', function(){
+          showdataCovid()
+        })
+        
+        d3.select('#Electiondata').on('click', function(){
+          showdataElection()
+        })
+        
+         d3.select('#Residencedata').on('click', function(){
+          showdataResidence()
+        })
+        
+    }
+    <div id="htmlwidget-4999665af7e13db9fe0b" style="width:672px;height:480px;" class="r2d3 html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-4999665af7e13db9fe0b">{"x":{"data":null,"type":"NULL","container":"svg","options":null,"script":"var d3Script = function(d3, r2d3, data, svg, width, height, options, theme, console) {\nthis.d3 = d3;\n\nsvg = d3.select(svg.node());\nfunction showdataResidence(){\n      var i = whichstate\n\n\n \n  svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')\n     \n   // d3.csv('Work_Residence.csv').then(function(d){\n     \n\t       svg.append('text').attr('x', 160).attr('y', ys(540)).text('Work Residence Statistics for NYS in '+ d[i]['Geographic']).attr('font-size', '20px')\n    var Totallabor = parseInt(d[i]['Total_Labor'])\n    var Withresidence = parseInt(d[i]['With_Residence'])\n    var Workin = parseInt(d[i]['Work_in_PoR'])\n     var Workout = parseInt(d[i]['Worked_outside_PoR'])\n     var noresidence = parseInt(d[i]['No_Residence'])\n     \n     \n\t       var max = d3.max([Withresidence, Workin, Workout, noresidence])\n\t       \n\t       var ys2 = d3.scaleLinear()\n\t  \t   .domain([0, max])\n     .range([0, 400]);\n\t        \n\t        svg.append('text').attr('x', 450).attr('y', ys(400)).text('Totle Labor : ' + Totallabor).attr('font-size', '25px')\n\t        \n\t        svg.append('text').attr('x', 150).attr('y', ys(80)).text('With Residence')\n\t        svg.append('text').attr('x', 290).attr('y', ys(80)).text('No Residence')\n\t        \n\t        svg.append('rect').attr('x', 180).attr('y', 500-ys2(Withresidence)).attr('height', ys2(Withresidence)).attr('width', 60).attr('fill', 'lightgreen')\n\t        svg.append('rect').attr('x', 310).attr('y', 500 - ys2(noresidence)).attr('height', ys2(noresidence)).attr('width', 60).attr('fill', 'grey')\n\t        svg.append('rect').attr('x', 180).attr('y', 500-ys2(Workin)).attr('height', ys2(Workin)).attr('width', 60).attr('fill', 'lightblue')\n\t        \n\t        svg.append('text').attr('x', 190).attr('y', 500-ys2(Workin)).text(Workin)\n\t        svg.append('text').attr('x', 50).attr('y', ys(140)).text('Worked in')\n\t       svg.append('text').attr('x', 50).attr('y', ys(120)).text('County of')\n\t       svg.append('text').attr('x', 50).attr('y', ys(100)).text('Residence')\n\t         \n\t       svg.append('text').attr('x', 35).attr('y', ys(480)).text('Worked Outside')\n\t       svg.append('text').attr('x', 50).attr('y', ys(460)).text('County of')\n\t       svg.append('text').attr('x', 50).attr('y', ys(440)).text('Residence')\n\t         \n\t         \n\t        svg.append('text').attr('x', 190).attr('y', 490-ys2(Withresidence)).text(Withresidence)\n\t        \n\t        svg.append('text').attr('x', 320).attr('y', 490-ys2(noresidence)).text(noresidence)\n       \n   // })\n  \n  \n}\n};","style":null,"version":5,"theme":{"default":{"background":"#FFFFFF","foreground":"#000000"},"runtime":null},"useShadow":true},"evals":[],"jsHooks":[]}</script>
+function showdataElection()
+{
+var i = whichstate
+      
+svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
+      
+d3.csv('President2020.csv').then(function(d){
+         
+         
+svg.append('text').attr('x', 160).attr('y', ys(540)).text('Election vote in 2020 in '+ d[i]['County']).attr('font-size', '20px')
+
+var Bidenvote = parseInt(d[i]['Biden(DEM)'])+parseInt(d[i]['Biden(WOR)'] )
+var Trumpvote = parseInt(d[i]['Trump(REP)'])+parseInt(d[i]['Trump(CON)'])
+
+         
+var max = d3.max([Bidenvote, Trumpvote])
+           
+var ys2 = d3.scaleLinear()
+           .domain([0, max])
+         .range([0, 400]);
+            
+            svg.append('text').attr('x', 180).attr('y', ys(80)).text('Biden').attr('font-size','20px')
+            svg.append('text').attr('x', 280).attr('y', ys(80)).text(' Trump').attr('font-size','20px')
+            
+            svg.append('rect').attr('x', 180).attr('y', 500-ys2(Bidenvote)).attr('height', ys2(Bidenvote)).attr('width', 60).attr('fill', 'Blue')
+            svg.append('rect').attr('x', 280).attr('y', 500 - ys2(Trumpvote)).attr('height', ys2(Trumpvote)).attr('width', 60).attr('fill', 'red')
+             
+            svg.append('text').attr('x', 190).attr('y', 490-ys2(Bidenvote)).text(Bidenvote)
+            
+            svg.append('text').attr('x', 290).attr('y', 490-ys2(Trumpvote)).text(Trumpvote)
+      
+      })
+}
+    
+    function showdataCovid(){
+    
+       svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
+      
+      d3.csv('NYS_Covid_Case_1128.csv', function(d){
+          return{
+            TestDate : d.date,
+        County : d.County,
+        New_Positives : +d.New_Positives,
+        Cumulative_Positives : +d.Cumulative_Positives,
+        Tests_Performed : +d.Tests_Performed,
+        Cumulative_Tests_Performed : +d.Cumulative_Tests_Performed
+
+          };
+          
+          }).then(function(data){
+      
+       svg.append('text').attr('x', 160).attr('y', ys(500)).text('Statistics for Covid-19 for '+state+' at Nov.28').attr('font-size', '25px')
+        
+        
+         svg.append('text').attr('x',200).attr('y', ys(400)).text('New tested positives is : ' + data[i]['New_Positives'])
+         svg.append('text').attr('x',200).attr('y', ys(300)).text('Total tested positive is : ' + data[i]['Cumulative_Positives'])
+         svg.append('text').attr('x',200).attr('y', ys(200)).text('New test performed is : ' + data[i]['Tests_Performed'])
+         svg.append('text').attr('x',200).attr('y', ys(100)).text('Totle test performed is : ' + data[i]['Cumulative_Tests_Performed'])
+            
+      })
+    }
+    
+    function  start(){
+        
+       svg.append("rect")
+        .attr("x",30)
+        .attr("y",ys(530))
+        .attr('id', 'Albany1')
+        .attr('height', 30)
+        .attr('width', 55)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+       
+       svg.append("text")
+        .attr("x",35)
+        .attr("y",ys(510))
+        .attr('id', 'Albany')
+        .text('Albany')
+        .attr("stroke","black")
+        .attr("font-size", "15px")
+        
+        d3.select('#Albany').on('click', function(){
+          whichstate = 0
+          
+        svg.select('#Albany').transition().duration(300).attr('y', ys(540)).transition().duration(300).attr('y', ys(510)).transition().duration(200).attr('y', ys(520)).transition().duration(300).attr('y', ys(510)).transition().duration(300).attr('y', ys(515)).transition().duration(400).attr('y', ys(510)).on('end', choice)        
+          
+        })
+        
+       svg.append("rect")
+        .attr("x",100)
+        .attr("y",ys(530))
+        .attr('id', 'Allegany1')
+        .attr('height', 30)
+        .attr('width', 70)
+       .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x",108)
+        .attr("y",ys(510))
+        .attr('id', 'Allegany')
+        .text('Allegany')
+        .attr("stroke","black")
+        .attr("font-size", "15px")
+        
+         d3.select('#Allegany').on('click', function(){
+          whichstate = 1
+          
+              choice()     
+          
+        })
+        
+        svg.append("rect")
+        .attr("x",185)
+        .attr("y",ys(530))
+        .attr('id', 'Bronx1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x",195)
+        .attr("y",ys(510))
+        .attr('id', 'Bronx')
+        .text('Bronx')
+        .attr("stroke","black")
+        .attr("font-size", "15px")
+       
+        d3.select('#Bronx').on('click', function(){
+          whichstate = 2
+          
+              choice()     
+          
+        })
+       
+          svg.append("rect")
+        .attr("x",260)
+        .attr("y",ys(530))
+        .attr('id', 'Broome1')
+        .attr('height', 30)
+        .attr('width', 65)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x",268)
+        .attr("y",ys(510))
+        .attr('id', 'Broome')
+        .text('Broome')
+        .attr("stroke","black")
+        .attr("font-size", "15px")
+      
+          d3.select('#Broome').on('click', function(){
+          whichstate = 3
+          
+              choice()     
+          
+        })
+      
+      
+      svg.append("rect")
+        .attr("x",345)
+        .attr("y",ys(530))
+        .attr('id', 'Cattaraugus1')
+        .attr('height', 30)
+        .attr('width', 90)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x",350)
+        .attr("y",ys(510))
+        .attr('id', 'Cattaraugus')
+        .text('Cattaraugus')
+        .attr("stroke","black")
+        .attr("font-size", "15px")  
+      
+          d3.select('#Cattaraugus').on('click', function(){
+          whichstate = 4
+          
+              choice()     
+          
+        })  
+      
+      svg.append("rect")
+        .attr("x",455)
+        .attr("y",ys(530))
+        .attr('id', 'Cayuga1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 460)
+        .attr("y",ys(510))
+        .attr('id', 'Cayuga')
+        .text('Cayuga')
+        .attr("stroke","black")
+        .attr("font-size", "15px")  
+      
+      
+           
+          d3.select('#Cayuga').on('click', function(){
+          whichstate = 5
+          
+              choice()     
+          
+        })  
+      
+      svg.append("rect")
+        .attr("x", 535)
+        .attr("y",ys(530))
+        .attr('id', 'Chautauqua1')
+        .attr('height', 30)
+        .attr('width', 90)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 540)
+        .attr("y",ys(510))
+        .attr('id', 'Chautauqua')
+        .text('Chautauqua')
+        .attr("stroke","black")
+        .attr("font-size", "15px")
+        
+             
+          d3.select('#Chautauqua').on('click', function(){
+          whichstate = 6
+          
+              choice()     
+          
+        })    
+        
+        
+      svg.append("rect")
+        .attr("x", 30)
+        .attr("y",ys(480))
+        .attr('id', 'Chemung1')
+        .attr('height', 30)
+        .attr('width', 75)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 35)
+        .attr("y",ys(460))
+        .attr('id', 'Chemung')
+        .text('Chemung')
+        .attr("stroke","black")
+        .attr("font-size", "15px")
+        
+        d3.select('#Chemung').on('click', function(){
+          whichstate = 7
+          
+              choice()     
+          
+        })    
+        
+        
+         svg.append("rect")
+        .attr("x", 125)
+        .attr("y",ys(480))
+        .attr('id', 'Chenango1')
+        .attr('height', 30)
+        .attr('width', 75)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 130)
+        .attr("y",ys(460))
+        .attr('id', 'Chenango')
+        .text('Chenango')
+        .attr("stroke","black")
+        .attr("font-size", "15px")
+        
+            d3.select('#Chenango').on('click', function(){
+          whichstate = 8
+          
+              choice()     
+          
+        })   
+        
+       svg.append("rect")
+        .attr("x", 220)
+        .attr("y",ys(480))
+        .attr('id', 'Clinton1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 228)
+        .attr("y",ys(460))
+        .attr('id', 'Clinton')
+        .text('Clinton')
+        .attr("stroke","black")
+        .attr("font-size", "15px")
+        
+        d3.select('#Clinton').on('click', function(){
+          whichstate = 9
+          
+              choice()     
+          
+        })   
+        
+      svg.append("rect")
+        .attr("x", 300)
+        .attr("y",ys(480))
+        .attr('id', 'Columbia1')
+        .attr('height', 30)
+        .attr('width', 80)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 308)
+        .attr("y",ys(460))
+        .attr('id', 'Columbia')
+        .text('Columbia')
+        .attr("stroke","black")
+        .attr("font-size", "15px")
+        
+        d3.select('#Columbia').on('click', function(){
+          whichstate = 10
+          
+              choice()     
+          
+        })   
+        
+      svg.append("rect")
+        .attr("x", 400)
+        .attr("y",ys(480))
+        .attr('id', 'Cortland1')
+        .attr('height', 30)
+        .attr('width', 70)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 408)
+        .attr("y",ys(460))
+        .attr('id', 'Cortland')
+        .text('Cortland')
+        .attr("stroke","black")
+        .attr("font-size", "15px")
+        
+        d3.select('#Cortland').on('click', function(){
+          whichstate = 11
+          
+              choice()     
+          
+        })   
+        
+        
+       svg.append("rect")
+        .attr("x", 490)
+        .attr("y",ys(480))
+        .attr('id', 'Delaware1')
+        .attr('height', 30)
+        .attr('width', 70)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 495)
+        .attr("y",ys(460))
+        .attr('id', 'Delaware')
+        .text('Delaware')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+      
+        d3.select('#Delaware').on('click', function(){
+          whichstate = 12
+          choice()     
+        })   
+      
+      svg.append("rect")
+        .attr("x", 30)
+        .attr("y",ys(430))
+        .attr('id', 'Dutchess1')
+        .attr('height', 30)
+        .attr('width', 70)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 35)
+        .attr("y",ys(410))
+        .attr('id', 'Dutchess')
+        .text('Dutchess')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+        
+        d3.select('#Dutchess').on('click', function(){
+          whichstate = 13
+          choice()     
+        })   
+        
+        svg.append("rect")
+        .attr("x", 120)
+        .attr("y",ys(430))
+        .attr('id', 'Erie1')
+        .attr('height', 30)
+        .attr('width', 40)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 128)
+        .attr("y",ys(410))
+        .attr('id', 'Erie')
+        .text('Erie')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+        
+        d3.select('#Erie').on('click', function(){
+          whichstate = 14
+          choice()     
+        })   
+        
+       svg.append("rect")
+        .attr("x", 180)
+        .attr("y",ys(430))
+        .attr('id', 'Essex1')
+        .attr('height', 30)
+        .attr('width', 50)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 185)
+        .attr("y",ys(410))
+        .attr('id', 'Essex')
+        .text('Essex')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+        
+        d3.select('#Essex').on('click', function(){
+          whichstate = 15
+          choice()     
+        })    
+        
+      svg.append("rect")
+        .attr("x", 250)
+        .attr("y",ys(430))
+        .attr('id', 'Franklin1')
+        .attr('height', 30)
+        .attr('width', 70)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 258)
+        .attr("y",ys(410))
+        .attr('id', 'Franklin')
+        .text('Franklin')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+        
+        d3.select('#Franklin').on('click', function(){
+          whichstate = 16
+          choice()     
+        })          
+        
+        svg.append("rect")
+        .attr("x", 340)
+        .attr("y",ys(430))
+        .attr('id', 'Fulton1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 348)
+        .attr("y",ys(410))
+        .attr('id', 'Fulton')
+        .text('Fulton')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+        
+        d3.select('#Fulton').on('click', function(){
+          whichstate = 17
+          choice()     
+        })         
+      
+       svg.append("rect")
+        .attr("x", 420)
+        .attr("y",ys(430))
+        .attr('id', 'Genesee1')
+        .attr('height', 30)
+        .attr('width', 70)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 425)
+        .attr("y",ys(410))
+        .attr('id', 'Genesee')
+        .text('Genesee')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+        
+       d3.select('#Genesee').on('click', function(){
+          whichstate = 18
+          choice()     
+        })   
+      
+        
+        
+      svg.append("rect")
+        .attr("x", 510)
+        .attr("y",ys(430))
+        .attr('id', 'Greene1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 515)
+        .attr("y",ys(410))
+        .attr('id', 'Greene')
+        .text('Greene')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+        
+     d3.select('#Greene').on('click', function(){
+          whichstate = 19
+          choice()     
+        })       
+        
+        svg.append("rect")
+        .attr("x", 30)
+        .attr("y",ys(380))
+        .attr('id', 'Hamilton1')
+        .attr('height', 30)
+        .attr('width', 70)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 35)
+        .attr("y",ys(360))
+        .attr('id', 'Hamilton')
+        .text('Hamilton')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+        
+          d3.select('#Hamilton').on('click', function(){
+          whichstate = 20
+          choice()     
+        })       
+        
+        
+       svg.append("rect")
+        .attr("x", 120)
+        .attr("y",ys(380))
+        .attr('id', 'Herkimer1')
+        .attr('height', 30)
+        .attr('width', 70)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 125)
+        .attr("y",ys(360))
+        .attr('id', 'Herkimer')
+        .text('Herkimer')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+        
+      d3.select('#Herkimer').on('click', function(){
+          whichstate = 21
+          choice()     
+        })       
+        
+        svg.append("rect")
+        .attr("x", 210)
+        .attr("y",ys(380))
+        .attr('id', 'Jefferson1')
+        .attr('height', 30)
+        .attr('width', 70)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 215)
+        .attr("y",ys(360))
+        .attr('id', 'Jefferson')
+        .text('Jefferson')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+        
+      d3.select('#Jefferson').on('click', function(){
+          whichstate = 22
+          choice()     
+        })   
+        
+        
+        svg.append("rect")
+        .attr("x", 300)
+        .attr("y",ys(380))
+        .attr('id', 'Kings1')
+        .attr('height', 30)
+        .attr('width', 50)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 305)
+        .attr("y",ys(360))
+        .attr('id', 'Kings')
+        .text('Kings')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+        
+  d3.select('#Kings').on('click', function(){
+          whichstate = 23
+          choice()     
+        })  
+        
+        svg.append("rect")
+        .attr("x", 370)
+        .attr("y",ys(380))
+        .attr('id', 'Lewis1')
+        .attr('height', 30)
+        .attr('width', 50)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 375)
+        .attr("y",ys(360))
+        .attr('id', 'Lewis')
+        .text('Lewis')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+        
+          d3.select('#Lewis').on('click', function(){
+          whichstate = 24
+          choice()     
+        })  
+        
+        svg.append("rect")
+        .attr("x", 440)
+        .attr("y",ys(380))
+        .attr('id', 'Livingston1')
+        .attr('height', 30)
+        .attr('width', 80)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 445)
+        .attr("y",ys(360))
+        .attr('id', 'Livingston')
+        .text('Livingston')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+ 
+      d3.select('#Livingston').on('click', function(){
+          whichstate = 25
+          choice()     
+        })          
+       svg.append("rect")
+        .attr("x", 540)
+        .attr("y",ys(380))
+        .attr('id', 'Madison1')
+        .attr('height', 30)
+        .attr('width', 70)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 548)
+        .attr("y",ys(360))
+        .attr('id', 'Madison')
+        .text('Madison')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+      d3.select('#Madison').on('click', function(){
+          whichstate = 26
+          choice()     
+        })   
+        
+       svg.append("rect")
+        .attr("x", 30)
+        .attr("y",ys(330))
+        .attr('id', 'Monroe1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 35)
+        .attr("y",ys(310))
+        .attr('id', 'Monroe')
+        .text('Monroe')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+      d3.select('#Monroe').on('click', function(){
+          whichstate = 27
+          choice()     
+        })   
+        
+      svg.append("rect")
+        .attr("x", 110)
+        .attr("y",ys(330))
+        .attr('id', 'Montgomery1')
+        .attr('height', 30)
+        .attr('width', 90)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 112)
+        .attr("y",ys(310))
+        .attr('id', 'Montgomery')
+        .text('Montgomery')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+  
+      d3.select('#Montgomery').on('click', function(){
+          whichstate = 28
+          choice()     
+        })           
+        
+      svg.append("rect")
+        .attr("x", 220)
+        .attr("y",ys(330))
+        .attr('id', 'Nassau1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 225)
+        .attr("y",ys(310))
+        .attr('id', 'Nassau')
+        .text('Nassau')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+      d3.select('#Nassau').on('click', function(){
+          whichstate = 29
+          choice()     
+        })   
+        
+        svg.append("rect")
+        .attr("x", 300)
+        .attr("y",ys(330))
+        .attr('id', 'New York City1')
+        .attr('height', 30)
+        .attr('width', 110)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 308)
+        .attr("y",ys(310))
+        .attr('id', 'New_York_City')
+        .text('New York City')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+      d3.select('#New_York_City').on('click', function(){
+          whichstate = 30
+          choice()     
+        })   
+        
+       svg.append("rect")
+        .attr("x", 430)
+        .attr("y",ys(330))
+        .attr('id', 'Niagara1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 435)
+        .attr("y",ys(310))
+        .attr('id', 'Niagara')
+        .text('Niagara')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+      d3.select('#Niagara').on('click', function(){
+          whichstate = 31
+          choice()     
+        })    
+        
+        
+      svg.append("rect")
+        .attr("x", 510)
+        .attr("y",ys(330))
+        .attr('id', 'Oneida1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 515)
+        .attr("y",ys(310))
+        .attr('id', 'Oneida')
+        .text('Oneida')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+      d3.select('#Oneida').on('click', function(){
+          whichstate = 32
+          choice()     
+        })   
+        
+      svg.append("rect")
+        .attr("x", 580)
+        .attr("y",ys(330))
+        .attr('id', 'Onondaga1')
+        .attr('height', 30)
+        .attr('width', 80)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 585)
+        .attr("y",ys(310))
+        .attr('id', 'Onondaga')
+        .text('Onondaga')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+  
+      d3.select('#Onondaga').on('click', function(){
+          whichstate = 33
+          choice()     
+        })     
+        
+       svg.append("rect")
+        .attr("x", 30)
+        .attr("y",ys(280))
+        .attr('id', 'Ontario1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 35)
+        .attr("y",ys(260))
+        .attr('id', 'Ontario')
+        .text('Ontario')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+      d3.select('#Ontario').on('click', function(){
+          whichstate = 34
+          choice()     
+        })     
+        
+      svg.append("rect")
+        .attr("x", 110)
+        .attr("y",ys(280))
+        .attr('id', 'Orange1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 115)
+        .attr("y",ys(260))
+        .attr('id', 'Orange')
+        .text('Orange')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+      d3.select('#Orange').on('click', function(){
+          whichstate = 35
+          choice()     
+        })  
+        
+      svg.append("rect")
+        .attr("x", 190)
+        .attr("y",ys(280))
+        .attr('id', 'Orleans1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 195)
+        .attr("y",ys(260))
+        .attr('id', 'Orleans')
+        .text('Orleans')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+      d3.select('#Orleans').on('click', function(){
+          whichstate = 36
+          choice()     
+        })  
+        
+        svg.append("rect")
+        .attr("x", 270)
+        .attr("y",ys(280))
+        .attr('id', 'Oswego1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 273)
+        .attr("y",ys(260))
+        .attr('id', 'Oswego')
+        .text('Oswego')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+ 
+      d3.select('#Oswego').on('click', function(){
+          whichstate = 37
+          choice()     
+        })   
+        
+      svg.append("rect")
+        .attr("x", 350)
+        .attr("y",ys(280))
+        .attr('id', 'Otsego1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 358)
+        .attr("y",ys(260))
+        .attr('id', 'Otsego')
+        .text('Otsego')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+      d3.select('#Otsego').on('click', function(){
+          whichstate = 38
+          choice()     
+        })   
+        
+      svg.append("rect")
+        .attr("x", 430)
+        .attr("y",ys(280))
+        .attr('id', 'Putnam1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 435)
+        .attr("y",ys(260))
+        .attr('id', 'Putnam')
+        .text('Putnam')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+ 
+       d3.select('#Putnam').on('click', function(){
+          whichstate = 39
+          choice()     
+        })   
+        
+        svg.append("rect")
+        .attr("x", 510)
+        .attr("y",ys(280))
+        .attr('id', 'Queens1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 515)
+        .attr("y",ys(260))
+        .attr('id', 'Queens')
+        .text('Queens')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+        
+        d3.select('#Queens').on('click', function(){
+          whichstate = 40
+          choice()     
+        })   
+ 
+        svg.append("rect")
+        .attr("x", 590)
+        .attr("y",ys(280))
+        .attr('id', 'Rensselaer1')
+        .attr('height', 30)
+        .attr('width', 80)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 593)
+        .attr("y",ys(260))
+        .attr('id', 'Rensselaer')
+        .text('Rensselaer')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+        d3.select('#Rensselaer').on('click', function(){
+          whichstate = 41
+          choice()     
+        })    
+        
+        svg.append("rect")
+        .attr("x", 30)
+        .attr("y",ys(230))
+        .attr('id', 'Richmond1')
+        .attr('height', 30)
+        .attr('width', 80)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 35)
+        .attr("y",ys(210))
+        .attr('id', 'Richmond')
+        .text('Richmond')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+        d3.select('#Richmond').on('click', function(){
+          whichstate = 42
+          choice()     
+        })    
+
+        
+       svg.append("rect")
+        .attr("x", 130)
+        .attr("y",ys(230))
+        .attr('id', 'Rockland1')
+        .attr('height', 30)
+        .attr('width', 80)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 138)
+        .attr("y",ys(210))
+        .attr('id', 'Rockland')
+        .text('Rockland')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+
+        d3.select('#Rockland').on('click', function(){
+          whichstate = 43
+          choice()     
+        })           
+        
+      svg.append("rect")
+        .attr("x", 230)
+        .attr("y",ys(230))
+        .attr('id', 'St. Lawrence1')
+        .attr('height', 30)
+        .attr('width', 98)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 235)
+        .attr("y",ys(210))
+        .attr('id', 'StLawrence')
+        .text('St. Lawrence')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+ 
+
+        d3.select('#StLawrence').on('click', function(){
+          whichstate = 44
+          choice()     
+        })    
+        
+      svg.append("rect")
+        .attr("x", 340)
+        .attr("y",ys(230))
+        .attr('id', 'Saratoga1')
+        .attr('height', 30)
+        .attr('width', 70)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 345)
+        .attr("y",ys(210))
+        .attr('id', 'Saratoga')
+        .text('Saratoga')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+  
+        d3.select('#Saratoga').on('click', function(){
+          whichstate = 45
+          choice()     
+        })    
+        
+      svg.append("rect")
+        .attr("x", 430)
+        .attr("y",ys(230))
+        .attr('id', 'Schenectady1')
+        .attr('height', 30)
+        .attr('width', 95)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 435)
+        .attr("y",ys(210))
+        .attr('id', 'Schenectady')
+        .text('Schenectady')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+        d3.select('#Schenectady').on('click', function(){
+          whichstate = 46
+          choice()     
+        })    
+        
+       svg.append("rect")
+        .attr("x", 540)
+        .attr("y",ys(230))
+        .attr('id', 'Schoharie1')
+        .attr('height', 30)
+        .attr('width', 75)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 545)
+        .attr("y",ys(210))
+        .attr('id', 'Schoharie')
+        .text('Schoharie')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+        d3.select('#Schoharie').on('click', function(){
+          whichstate = 47
+          choice()     
+        })    
+        
+       svg.append("rect")
+        .attr("x", 30)
+        .attr("y",ys(180))
+        .attr('id', 'Schuyler1')
+        .attr('height', 30)
+        .attr('width', 70)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 35)
+        .attr("y",ys(160))
+        .attr('id', 'Schuyler')
+        .text('Schuyler')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+        d3.select('#Schuyler').on('click', function(){
+          whichstate = 48
+          choice()     
+        })    
+        
+        svg.append("rect")
+        .attr("x", 120)
+        .attr("y",ys(180))
+        .attr('id', 'Seneca1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 125)
+        .attr("y",ys(160))
+        .attr('id', 'Seneca')
+        .text('Seneca')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+        d3.select('#Seneca').on('click', function(){
+          whichstate = 49
+          choice()     
+        })    
+        
+       svg.append("rect")
+        .attr("x", 200)
+        .attr("y",ys(180))
+        .attr('id', 'Steuben1')
+        .attr('height', 30)
+        .attr('width', 65)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 205)
+        .attr("y",ys(160))
+        .attr('id', 'Steuben')
+        .text('Steuben')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+ 
+        d3.select('#Steuben').on('click', function(){
+          whichstate = 50
+          choice()     
+        })     
+        
+      svg.append("rect")
+        .attr("x", 280)
+        .attr("y",ys(180))
+        .attr('id', 'Suffolk1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 288)
+        .attr("y",ys(160))
+        .attr('id', 'Suffolk')
+        .text('Suffolk')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+
+ 
+        d3.select('#Suffolk').on('click', function(){
+          whichstate = 51
+          choice()     
+        })    
+        
+       svg.append("rect")
+        .attr("x", 360)
+        .attr("y",ys(180))
+        .attr('id', 'Sullivan1')
+        .attr('height', 30)
+        .attr('width', 70)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 368)
+        .attr("y",ys(160))
+        .attr('id', 'Sullivan')
+        .text('Sullivan')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+ 
+        d3.select('#Sullivan').on('click', function(){
+          whichstate = 52
+          choice()     
+        })     
+        
+      svg.append("rect")
+        .attr("x", 450)
+        .attr("y",ys(180))
+        .attr('id', 'Tioga1')
+        .attr('height', 30)
+        .attr('width', 50)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 458)
+        .attr("y",ys(160))
+        .attr('id', 'Tioga')
+        .text('Tioga')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+ 
+ 
+        d3.select('#Tioga').on('click', function(){
+          whichstate = 53
+          choice()     
+        })   
+        
+       svg.append("rect")
+        .attr("x", 520)
+        .attr("y",ys(180))
+        .attr('id', 'Tompkins1')
+        .attr('height', 30)
+        .attr('width', 80)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 528)
+        .attr("y",ys(160))
+        .attr('id', 'Tompkins')
+        .text('Tompkins')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+ 
+        d3.select('#Tompkins').on('click', function(){
+          whichstate = 54
+          choice()     
+        })    
+        
+       svg.append("rect")
+        .attr("x", 30)
+        .attr("y",ys(130))
+        .attr('id', 'Ulster1')
+        .attr('height', 30)
+        .attr('width', 50)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 35)
+        .attr("y",ys(110))
+        .attr('id', 'Ulster')
+        .text('Ulster')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+     
+        d3.select('#Ulster').on('click', function(){
+          whichstate = 55
+          choice()     
+        })    
+
+        
+      svg.append("rect")
+        .attr("x", 100)
+        .attr("y",ys(130))
+        .attr('id', 'Warren1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 108)
+        .attr("y",ys(110))
+        .attr('id', 'Warren')
+        .text('Warren')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+       
+        d3.select('#Warren').on('click', function(){
+          whichstate = 56
+          choice()     
+        })    
+
+        
+      svg.append("rect")
+        .attr("x", 180)
+        .attr("y",ys(130))
+        .attr('id', 'Washington1')
+        .attr('height', 30)
+        .attr('width', 90)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 185)
+        .attr("y",ys(110))
+        .attr('id', 'Washington')
+        .text('Washington')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+ 
+        d3.select('#Washington').on('click', function(){
+          whichstate = 57
+          choice()     
+        })     
+        
+       svg.append("rect")
+        .attr("x", 290)
+        .attr("y",ys(130))
+        .attr('id', 'Wayne1')
+        .attr('height', 30)
+        .attr('width', 60)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 298)
+        .attr("y",ys(110))
+        .attr('id', 'Wayne')
+        .text('Wayne')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+ 
+        d3.select('#Wayne').on('click', function(){
+          whichstate = 58
+          choice()     
+        })      
+        
+      svg.append("rect")
+        .attr("x", 370)
+        .attr("y",ys(130))
+        .attr('id', 'Westchester1')
+        .attr('height', 30)
+        .attr('width', 95)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 375)
+        .attr("y",ys(110))
+        .attr('id', 'Westchester')
+        .text('Westchester')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+  
+        d3.select('#Westchester').on('click', function(){
+          whichstate = 59
+          choice()     
+        })      
+               
+       svg.append("rect")
+        .attr("x", 480)
+        .attr("y",ys(130))
+        .attr('id', 'Wyoming1')
+        .attr('height', 30)
+        .attr('width', 75)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 488)
+        .attr("y",ys(110))
+        .attr('id', 'Wyoming')
+        .text('Wyoming')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+    
+        d3.select('#Wyoming').on('click', function(){
+          whichstate = 60
+          choice()     
+        })       
+        
+       svg.append("rect")
+        .attr("x", 575)
+        .attr("y",ys(130))
+        .attr('id', 'Yates1')
+        .attr('height', 30)
+        .attr('width', 50)
+        .attr('fill', 'white')
+        .attr('stroke', 'black')
+        
+       svg.append("text")
+        .attr("x", 583)
+        .attr("y",ys(110))
+        .attr('id', 'Yates')
+        .text('Yates')
+        .attr("stroke","black")
+        .attr("font-size", "15px") 
+ 
+         d3.select('#Yates').on('click', function(){
+          whichstate = 61
+          choice()     
+        })    
+        
+        
+      svg.append("text")
+        .attr("x", 100)
+        .attr("y",ys(30))
+        .attr('id', 'inst')
+        .text('Click on name of county to view data')
+        .attr("stroke","black")
+        .attr("font-size", "30px") 
+      
+    }
+
+
+
+</script>
+<p><a href="./mask.html">this link</a></p>
 
 </div>
             </section>
@@ -139,7 +1708,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/YOUR Chenchaoyou/Covid-Health/edit/main/06-interactive.Rmd",
+"link": "https://github.com/Chenchaoyou/Covid-Health/edit/main/06-interactive.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -147,7 +1716,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/YOUR Chenchaoyou/Covid-Health/blob/main/06-interactive.Rmd",
+"link": "https://github.com/Chenchaoyou/Covid-Health/blob/main/06-interactive.Rmd",
 "text": null
 },
 "download": null,

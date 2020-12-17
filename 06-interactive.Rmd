@@ -77,7 +77,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
     }
     
     function showdataResidence(){
-       var i = whichstate
+          var i = whichstate
       
       svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
          
@@ -90,50 +90,47 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
          var Workout = parseInt(d[i]['Worked_outside_PoR'])
          var noresidence = parseInt(d[i]['No_Residence'])
          
+         
 	       var max = d3.max([Withresidence, Workin, Workout, noresidence])
 	       
 	       var ys2 = d3.scaleLinear()
 	  	   .domain([0, max])
          .range([0, 400]);
 	        
-	        svg.append('text').attr('x', 400).attr('y', ys(400)).text('Totle Labor : ' + Totallabor).attr('font-size', '25px')
-	        svg.append('text').attr('x', 110).attr('y', ys(80)).text('With Residence')
-	        svg.append('text').attr('x', 250).attr('y', ys(80)).text('No Residence')
+	        svg.append('text').attr('x', 450).attr('y', ys(400)).text('Totle Labor : ' + Totallabor).attr('font-size', '25px')
 	        
-	        svg.append('rect').attr('x', 130).attr('y', 500-ys2(Withresidence)).attr('height', ys2(Withresidence)).attr('width', 60).attr('fill', 'lightgreen')
-	        svg.append('rect').attr('x', 260).attr('y', 500 - ys2(noresidence)).attr('height', ys2(noresidence)).attr('width', 60).attr('fill', 'grey')
-	        svg.append('rect').attr('x', 130).attr('y', 500-ys2(Workin)).attr('height', ys2(Workin)).attr('width', 60).attr('fill', 'lightblue')
+	        svg.append('text').attr('x', 150).attr('y', ys(80)).text('With Residence')
+	        svg.append('text').attr('x', 290).attr('y', ys(80)).text('No Residence')
 	        
-	        svg.append('text').attr('x', 140).attr('y', 500-ys2(Workin)).text(Workin)
-	        svg.append('text').attr('x', 40).attr('y', ys(140)).text('Worked in')
-	       svg.append('text').attr('x', 40).attr('y', ys(120)).text('County of')
-	       svg.append('text').attr('x', 40).attr('y', ys(100)).text('Residence')
-	         
-	       svg.append('text').attr('x', 25).attr('y', ys(480)).text('Worked Outside')
-	       svg.append('text').attr('x', 40).attr('y', ys(460)).text('County of')
-	       svg.append('text').attr('x', 40).attr('y', ys(440)).text('Residence')
-	         
-	         
-	        svg.append('text').attr('x', 140).attr('y', 490-ys2(Withresidence)).text(Withresidence)
+	        svg.append('rect').attr('x', 180).attr('y', 500-ys2(Withresidence)).attr('height', ys2(Withresidence)).attr('width', 60).attr('fill', 'lightgreen')
+	        svg.append('rect').attr('x', 310).attr('y', 500 - ys2(noresidence)).attr('height', ys2(noresidence)).attr('width', 60).attr('fill', 'grey')
+	        svg.append('rect').attr('x', 180).attr('y', 500-ys2(Workin)).attr('height', ys2(Workin)).attr('width', 60).attr('fill', 'lightblue')
 	        
-	        svg.append('text').attr('x', 270).attr('y', 490-ys2(noresidence)).text(noresidence)
+	        svg.append('text').attr('x', 190).attr('y', 500-ys2(Workin)).text(Workin)
+	        svg.append('text').attr('x', 50).attr('y', ys(140)).text('Worked in')
+	       svg.append('text').attr('x', 50).attr('y', ys(120)).text('County of')
+	       svg.append('text').attr('x', 50).attr('y', ys(100)).text('Residence')
+	         
+	       svg.append('text').attr('x', 35).attr('y', ys(480)).text('Worked Outside')
+	       svg.append('text').attr('x', 50).attr('y', ys(460)).text('County of')
+	       svg.append('text').attr('x', 50).attr('y', ys(440)).text('Residence')
+	         
+	         
+	        svg.append('text').attr('x', 190).attr('y', 490-ys2(Withresidence)).text(Withresidence)
+	        
+	        svg.append('text').attr('x', 320).attr('y', 490-ys2(noresidence)).text(noresidence)
            
-         })
+    })
       
       
     }
     
-    function showdataElection(){
-      var i = whichstate
+function showdataElection()
+{
+var i = whichstate
       
-      svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
-         
+svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
       
-      
-      const ys = d3.scaleLinear()
-	  	 .domain([0, 600])
-         .range([600, 0]);
-        
 d3.csv('President2020.csv').then(function(d){
          
          
@@ -158,17 +155,15 @@ var ys2 = d3.scaleLinear()
 	        svg.append('text').attr('x', 190).attr('y', 490-ys2(Bidenvote)).text(Bidenvote)
 	        
 	        svg.append('text').attr('x', 290).attr('y', 490-ys2(Trumpvote)).text(Trumpvote)
-           
-         })
       
-      
-      
-    }
+      })
+}
     
     function showdataCovid(){
+    
        svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
       
-       d3.csv('NYS_Covid_Case_1128.csv', function(d){
+      d3.csv('NYS_Covid_Case_1128.csv', function(d){
 		  return{
 		    TestDate : d.date,
         County : d.County,
@@ -180,19 +175,16 @@ var ys2 = d3.scaleLinear()
 		  };
 		  
 		  }).then(function(data){
-		    var i = whichstate
-		      var state = data[i]['County']
-		      //var x = [data[0]['New_Positives'], data[0]['Cumulative_Positives'], data[0]['Tests_Performed'], data[0]['Cumulative_Tests_Performed']]
-		     // var n = d3.max(x)
-		  
-		    svg.append('text').attr('x', 250).attr('y', ys(500)).text('Statistic for ' + state + ' at Nov.28').attr('font-size', '25px')
-	      svg.append('text').attr('x',200).attr('y', ys(400)).text('New tested positives for ' +    'is : ' + data[i]['New_Positives'])
-	     svg.append('text').attr('x',200).attr('y', ys(300)).text('New tested positives for ' +    'is : ' + data[i]['Cumulative_Positives'])
-	     svg.append('text').attr('x',200).attr('y', ys(200)).text('New tested positives for ' +    'is : ' + data[i]['Tests_Performed'])
-	     svg.append('text').attr('x',200).attr('y', ys(100)).text('New tested positives for ' +    'is : ' + data[i]['Cumulative_Tests_Performed'])
-	        
-         })
       
+       svg.append('text').attr('x', 160).attr('y', ys(500)).text('Statistics for Covid-19 for '+state+' at Nov.28').attr('font-size', '25px')
+	    
+	    
+	     svg.append('text').attr('x',200).attr('y', ys(400)).text('New tested positives is : ' + data[i]['New_Positives'])
+	     svg.append('text').attr('x',200).attr('y', ys(300)).text('Total tested positive is : ' + data[i]['Cumulative_Positives'])
+	     svg.append('text').attr('x',200).attr('y', ys(200)).text('New test performed is : ' + data[i]['Tests_Performed'])
+	     svg.append('text').attr('x',200).attr('y', ys(100)).text('Totle test performed is : ' + data[i]['Cumulative_Tests_Performed'])
+	        
+      })
     }
     
     function  start(){
@@ -227,7 +219,7 @@ var ys2 = d3.scaleLinear()
         .attr('id', 'Allegany1')
         .attr('height', 30)
         .attr('width', 70)
-        .attr('fill', 'white')
+       .attr('fill', 'white')
         .attr('stroke', 'black')
         
        svg.append("text")

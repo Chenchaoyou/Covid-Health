@@ -2,8 +2,11 @@
 
 <script src="https://d3js.org/d3.v6.min.js"></script>
 
+<div id='plot'> </div>
+
 <script>
-svg = d3.select('body').append('svg').attr('id', 'svg1').attr('width', 1000).attr('height', 600)
+
+var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1000).attr('height', 600)
 		  
 		svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
 		
@@ -14,6 +17,7 @@ svg = d3.select('body').append('svg').attr('id', 'svg1').attr('width', 1000).att
 		var whichstate = 0
 		
     var svg = d3.select('body').select('svg')
+
     start()
     
     function choice(){
@@ -127,7 +131,7 @@ svg = d3.select('body').append('svg').attr('id', 'svg1').attr('width', 1000).att
     function showdataCovid(){
        svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
       
-       d3.csv('NYS_Covid_Case_1128.csv', function(d){
+       d3.csv('./NYS_Covid_Case_1128.csv', function(d){
 		  return{
 		    TestDate : d.date,
         County : d.County,
@@ -1572,13 +1576,5 @@ svg = d3.select('body').append('svg').attr('id', 'svg1').attr('width', 1000).att
         .attr("font-size", "30px") 
       
     }
-    
-    d3.select('body').append('h1').text('title 2')
-    
-    svg2 = d3.select('body').append('svg').attr('id', 'svg2').attr('width', 1000).attr('height', 600)
-    
-    svg2.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
-    
-    
-        
+
 </script>

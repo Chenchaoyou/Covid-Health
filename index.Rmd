@@ -19,7 +19,7 @@ We aim to explore three questions:
 
 2) Is there a pattern between income and COVID case growth among New York counties?
 
-3) 
+3) Is there a pattern between race and COVID case grown among New York State counties?
 
 
 We will provide early exploratory data analysis at this stage of the project. Causation will not be implied by correlation at early exploratory analysis but will offer directions in which we can further investigate.

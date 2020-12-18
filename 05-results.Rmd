@@ -483,7 +483,7 @@ To visualize our findings, we compare the Covid Positive Rate of four flipped co
                main='Covid Rate of Flipped/Other Counties') %>%
     dyAxis("y", label = "Covid Rate") %>%
     dyAxis("x", label = "Time") %>%
-    dyLegend(width = 500) %>%
+    dyLegend(width = 400) %>%
     dyOptions(axisLineWidth = 2, fillGraph = TRUE, drawGrid = FALSE)
 ```
 

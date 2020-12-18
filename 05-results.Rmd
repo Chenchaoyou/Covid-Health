@@ -1,0 +1,495 @@
+# Results
+
+```{r packages}
+  library(tidyr)
+  library(xts)
+  library(rgdal)
+  library(dplyr)
+  library(leaflet)
+  library(readxl)
+  library(leaflet.extras)
+  library(dygraphs)
+  library(ggplot2)
+  library(GGally)
+
+```
+
+## Work-Residence Data and Covid Case Growth
+
+### Choropleth Map showing Commuter-packed Counties and Covid Cases.
+
+In our exploratory analysis, we discovered that commuters have a positive correlation with the Covid case grow. The following choropleth map shows some interesting patterns:
+
+```{r work-residence choropleth}
+nys_spdf <- readOGR( 
+  dsn= paste0(getwd(),"/dataset/Map/NYS") , 
+  layer="cty036",
+  verbose=FALSE
+)
+# Loading Geographic Data
+nys_geo <- nys_spdf@data[,c('NAME', 'POP2000')]
+lat = c()
+lng = c()
+for (i in c(1:67)){
+  coord = nys_spdf@polygons[[i]]@labpt
+  lat <- append(lat, coord[2])
+  lng <- append(lng, coord[1])
+}
+nys_geo$lati <- lat
+nys_geo$long <- lng
+nys_geo <- nys_geo %>% group_by(NAME) %>%
+  summarize(lati = mean(lati, na.rm=TRUE), long = mean(long, na.rm=TRUE))
+
+# Loading Covid Case Data
+nys_case <- read.csv("./dataset/Covid/NYS_Covid_Case.csv",
+                     , sep=",", dec=".")
+
+# Loading Work_Residence Data
+commute <-
+  read_excel("./dataset/Work_Residence/Work_Residence.xlsx")  
+commute$commuter <- commute$Worked_outside_PoR / commute$Total_Labor
+
+info<-merge(x=nys_case, y=commute, by.x="County", by.y = "Geographic", all= T)
+info<-merge(x=info, y=nys_geo, by.x="County", by.y = "NAME", all= T)
+info <- as_tibble(info)
+
+order <- nys_spdf@data$NAME
+nys_spdf@data <- merge(x=nys_spdf@data, y=commute,
+                      by.x="NAME", by.y = "Geographic",
+                      all= T, sort=FALSE)
+
+nys_spdf@data <- nys_spdf@data %>%
+  slice(match(order, NAME))
+
+info$TestDate <- as.Date(as.character(info$TestDate), format = "%m/%d/%y")
+
+info$sqtcum <- sqrt(info$Cumulative_Positives)
+info$logcum <- log(info$Cumulative_Positives+1)
+info$sqtnew <- sqrt(info$New_Positives)
+info$lognew <- log(info$New_Positives+1)
+
+bin_max = max(info$commuter)
+bin_min = min(info$commuter)
+
+info_final <- info[info$TestDate == '2020-11-28',]
+info_final <- as_tibble(info_final)
+
+palette <- colorBin(c('#fee0d2',  
+                      '#fcbba1',
+                      '#fc9272',
+                      '#fb6a4a',
+                      '#ef3b2c',
+                      '#cb181d',
+                      '#a50f15',
+                      '#67000d'), 
+                    bins = c(bin_min, bin_max/8, 2*bin_max/8,
+                             3*bin_max/8, 4*bin_max/8,
+                             5*bin_max/8, 6*bin_max/8,
+                             7*bin_max/8, bin_max))
+
+info_mar <- info[info$TestDate <= '2020-03-28',]
+monthly <- info_mar %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
+info_mar <-merge(x=info_mar, y=monthly, by.x="County", by.y = "County", all= T)
+info_mar <- as_tibble(info_mar)
+info_mar_select <- info_mar[(info_mar$County == "Herkimer")|(info_mar$County == "Jefferson"),]
+
+info_apr <- info[(info$TestDate > '2020-03-28')&(info$TestDate <= '2020-04-28'),]
+monthly <- info_apr %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
+info_apr <-merge(x=info_apr, y=monthly, by.x="County", by.y = "County", all= T)
+info_apr <- as_tibble(info_apr)
+info_apr_select <- info_apr[(info_apr$County == "Herkimer")|(info_apr$County == "Jefferson"),]
+
+info_may <- info[(info$TestDate > '2020-04-28')&(info$TestDate <= '2020-05-28'),]
+monthly <- info_may %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
+info_may <-merge(x=info_may, y=monthly, by.x="County", by.y = "County", all= T)
+info_may <- as_tibble(info_may)
+info_may_select <- info_may[(info_may$County == "Herkimer")|(info_may$County == "Jefferson"),]
+
+info_jun <- info[(info$TestDate > '2020-05-28')&(info$TestDate <= '2020-06-28'),]
+monthly <- info_jun %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
+info_jun <-merge(x=info_jun, y=monthly, by.x="County", by.y = "County", all= T)
+info_jun <- as_tibble(info_jun)
+info_jun_select <- info_jun[(info_jun$County == "Herkimer")|(info_jun$County == "Jefferson"),]
+
+info_jul <- info[(info$TestDate > '2020-06-28')&(info$TestDate <= '2020-07-28'),]
+monthly <- info_jul %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
+info_jul <-merge(x=info_jul, y=monthly, by.x="County", by.y = "County", all= T)
+info_jul <- as_tibble(info_jul)
+info_jul_select <- info_jul[(info_jul$County == "Herkimer")|(info_jul$County == "Jefferson"),]
+
+info_aug <- info[(info$TestDate > '2020-07-28')&(info$TestDate <= '2020-08-28'),]
+monthly <- info_aug %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
+info_aug <-merge(x=info_aug, y=monthly, by.x="County", by.y = "County", all= T)
+info_aug <- as_tibble(info_aug)
+info_aug_select <- info_aug[(info_aug$County == "Herkimer")|(info_aug$County == "Jefferson"),]
+
+info_sep <- info[(info$TestDate > '2020-08-28')&(info$TestDate <= '2020-09-28'),]
+monthly <- info_sep %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
+info_sep <-merge(x=info_sep, y=monthly, by.x="County", by.y = "County", all= T)
+info_sep <- as_tibble(info_sep)
+info_sep_select <- info_sep[(info_sep$County == "Herkimer")|(info_sep$County == "Jefferson"),]
+
+info_oct <- info[(info$TestDate > '2020-09-28')&(info$TestDate <= '2020-10-28'),]
+monthly <- info_oct %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
+info_oct <-merge(x=info_oct, y=monthly, by.x="County", by.y = "County", all= T)
+info_oct <- as_tibble(info_oct)
+info_oct_select <- info_oct[(info_oct$County == "Herkimer")|(info_oct$County == "Jefferson"),]
+
+info_nov <- info[(info$TestDate > '2020-10-28')&(info$TestDate <= '2020-11-28'),]
+monthly <- info_nov %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
+info_nov <-merge(x=info_nov, y=monthly, by.x="County", by.y = "County", all= T)
+info_nov <- as_tibble(info_nov)
+info_nov_select <- info_nov[(info_nov$County == "Herkimer")|(info_nov$County == "Jefferson"),]
+# Construct Leaflet Map
+
+mymap <- leaflet() %>% 
+  addProviderTiles("Esri.WorldGrayCanvas",
+                   options = tileOptions(minZoom=7, maxZoom=10)
+  )%>%
+  addPolygons(data = nys_spdf, 
+              fillColor = ~palette(nys_spdf@data$commuter),
+              fillOpacity = 0.6,         ## how transparent do you want the polygon to be?
+              color = "darkgrey",       ## color of borders between districts
+              weight = 1.5,            ## width of borders
+              group="background_group",
+              label = nys_spdf@data$NAME,
+              popup = ~ paste0("<b>", nys_spdf@data$NAME, 
+                               "</b><br>Total Labor: <br>", nys_spdf@data$Total_Labor,
+                               "</b><br>Outside PoR: <br>", nys_spdf@data$Worked_outside_PoR)
+  )%>%
+  addCircleMarkers(
+    group = "2020-Mar",
+    data = info_mar,
+    lng = ~long,
+    lat = ~lati, 
+    radius = ~1.3*log(monthly+1)+1, 
+    color = "Teal",
+    fillOpacity=0.1,
+    stroke = FALSE, 
+    popup = ~ paste0("<b>", County, "</b><br>Monthly Confirmed Cases: <br>", monthly)
+  )%>%
+  addCircleMarkers(
+    group = "2020-Apr",
+    data = info_apr,
+    lng = ~long,
+    lat = ~lati, 
+    radius = ~1.3*log(monthly+1)+1, 
+    color = "Teal", 
+    opacity = 0.6,
+    stroke = FALSE, 
+    popup = ~ paste0("<b>", County, "</b><br>Monthly Confirmed Cases: <br>", monthly)
+  )%>%
+  addCircleMarkers(
+    group = "2020-May",
+    data = info_may,
+    lng = ~long,
+    lat = ~lati, 
+    radius = ~1.3*log(monthly+1)+1, 
+    color = "Teal", 
+    opacity = 0.6,
+    stroke = FALSE, 
+    popup = ~ paste0("<b>", County, "</b><br>Monthly Confirmed Cases: <br>", monthly)
+  )%>%
+  addCircleMarkers(
+    group = "2020-Jun",
+    data = info_jun,
+    lng = ~long,
+    lat = ~lati, 
+    radius = ~1.3*log(monthly+1)+1, 
+    color = "Teal", 
+    opacity = 0.6,
+    stroke = FALSE, 
+    popup = ~ paste0("<b>", County, "</b><br>Monthly Confirmed Cases: <br>", monthly)
+  )%>%
+  addCircleMarkers(
+    group = "2020-Jul",
+    data = info_jul,
+    lng = ~long,
+    lat = ~lati, 
+    radius = ~1.3*log(monthly+1)+1, 
+    color = "Teal",
+    opacity = 0.6,
+    stroke = FALSE, 
+    popup = ~ paste0("<b>", County, "</b><br>Monthly Confirmed Cases: <br>", monthly)
+  )%>%
+  addCircleMarkers(
+    group = "2020-Aug",
+    data = info_aug,
+    lng = ~long,
+    lat = ~lati, 
+    radius = ~1.3*log(monthly+1)+1, 
+    color = "Teal", 
+    opacity = 0.6,
+    stroke = FALSE, 
+    popup = ~ paste0("<b>", County, "</b><br>Monthly Confirmed Cases: <br>", monthly)
+  )%>%
+  addCircleMarkers(
+    data = info_sep,
+    lng = ~long,
+    lat = ~lati, 
+    radius = ~1.3*log(monthly+1)+1, 
+    color = "Teal",
+    opacity = 0.6,
+    stroke = FALSE, 
+    popup = ~ paste0("<b>", County, "</b><br>Monthly Confirmed Cases: <br>", monthly)
+  )%>%
+  addCircleMarkers(
+    group = "2020-Oct",
+    data = info_oct,
+    lng = ~long,
+    lat = ~lati, 
+    radius = ~1.3*log(monthly+1)+1, 
+    color = "Teal", 
+    opacity = 0.6,
+    stroke = FALSE, 
+    popup = ~ paste0("<b>", County, "</b><br>Monthly Confirmed Cases: <br>", monthly)
+  )%>%
+  addCircleMarkers(
+    group = "2020-Nov",
+    data = info_nov,
+    lng = ~long,
+    lat = ~lati, 
+    radius = ~1.3*log(monthly+1)+1, 
+    color = "Teal",
+    opacity = 0.6,
+    stroke = FALSE, 
+    popup = ~ paste0("<b>", County, "</b><br>Monthly Confirmed Cases: <br>", monthly)
+  )%>%
+  addMarkers(
+    data = info_mar_select,
+    lng = ~long,
+    lat = ~lati, 
+    popup = ~ paste0("<b>", County)
+  )%>%
+  addLayersControl(
+    baseGroups = c("2020-Mar", "2020-Apr", "2020-May", "2020-Jun", "2020-Jul", "2020-Aug",
+                   "2020-Sep", "2020-Oct", "2020-Nov"), 
+    position = "bottomleft", 
+    options = layersControlOptions(collapsed = FALSE)
+  )%>% 
+  addLegend(position = 'topright', 
+            colors = c('#fee0d2',
+                       '#fcbba1',
+                       '#fc9272',
+                       '#fb6a4a',
+                       '#ef3b2c',
+                       '#cb181d',
+                       '#a50f15',
+                       '#67000d'), 
+            labels = c(paste(trunc(100*bin_min), '%', sep=""),"","","",
+                       "","","",paste(trunc(100*bin_max), '%', sep="")),  
+            opacity = 0.6,      
+            title = "Labor working <br>outside county<br> of residence"
+  )%>%
+  addLegend(position = 'topleft',
+            colors = 'Teal',
+            labels = "New Postive <br>During the Month"
+  )%>%
+  addResetMapButton()
+mymap  
+```
+
+<<<<<<< HEAD
+The heatmap shows the percentage of labor working outside county of residence. Deeper the color of the county is, the more ratio of workforce commutes outside the county. The teal colored circles represent the number of cumulative cases within each month of 2020. 
+
+We observe the following general pattern for suburban counties: Deeper the color is (More commuters), the more likely that corresponding county experiences an <b>early stage</b> sharp growth in covid numbers. Our hypothesis is that for a suburban county, the more people working outside county of residence, the more likely Covid transmitted early to that county, which resulted in an early rapid growth in case numbers. 
+=======
+The heatmap shows the percentage of labor working outside county of residence. Deeper the color of the county is, the more ratio of workforce commutes outside the county. The teal colored circles represent the number of cumulative cases within each month of 2020. The general pattern indicates and deeper the color is, the more likely that corresponding county and the surroundings of which experience sharp growth in COVID numbers. 
+
+We recognize the drawbacks to including circles in our exploratory analysis. As it can be difficult for viewers to assess the width of circles across a plane, and then associate that increase in width to a proportional increase in COVID case numbers. In addition, some viewers may find it hard to process patters about commuting and monthly covid cases in one graph. 
+
+A possible alternative approach may have been to break this interactive map into a series of two to six interactive maps: 1) have a static heat map showing the percentage of labors working outside their county of residence (e.g., have those counties pop-out when the specified percentage range is selected), then 2) Convert the variable **percentage labors working outside their county** to a categorical variable (e.g., group the counties into five or six groups based on percentage of labors working outside their county), and have a series of five or six of interactive heat maps that explore how the monthly COVID case load has changed since March. However, we we do not yet have the technical skill to feasibly complete such maps for this project. 
+
+>>>>>>> 1eba6482a8341a89b8e9123d9615ccc3226a1921
+
+### Time Series Comparison between Two Counties Covid Growth
+
+Comparing the areas of the circles is not an intuitive way to understand the pattern difference. To better understand the difference, we compare two counties suburb counties marked on the map above (Herkimer ~ 50% and Jefferson ~ 4%) that have very different commuter percentages and show their case growth below:
+
+```{r }
+  series <- info[,c('County', 'TestDate', "Cumulative_Positives")]
+  max_county <- "Herkimer"
+  min_county <- 'Jefferson'
+  max_pop <- nys_spdf@data[nys_spdf@data$NAME == 'Herkimer',]$POP2000
+  min_pop <- nys_spdf@data[nys_spdf@data$NAME == 'Jefferson',]$POP2000 
+  ratio <- max_pop/min_pop
+  
+  max_ts <- series[series$County == max_county,]
+  min_ts <- series[series$County == min_county,]
+  max_ts$Herkimer <- max_ts$Cumulative_Positives
+  min_ts$Jefferson <- min_ts$Cumulative_Positives
+  compare <- merge(x=max_ts, y=min_ts, by.x="TestDate", by.y = "TestDate", all= T)
+  compare <- compare[c('TestDate', 'Herkimer', 'Jefferson')]
+
+  compare_ts <- xts(compare[,-1], order.by=compare$TestDate)
+  dygraph(compare_ts, 
+               main='Cumulative Cases of Herkimer/Jefferson County') %>%
+    dySeries("Jefferson", axis = 'y2') %>%
+    dyAxis("y", label = "Cumulative Positives of Herkimer") %>%
+    dyAxis("y2", label = "Cumulative Positives of Yates", independentTicks = TRUE) %>%
+    dyAxis("x", label = "Time") %>%
+    dyLegend(width = 500) %>%
+    dyOptions(axisLineWidth = 2, fillGraph = TRUE, drawGrid = FALSE)
+```
+
+<<<<<<< HEAD
+In this graph, the green plot and the teal plot represents the cumulative postives in Herkimer and Jefferson county respectively. As we observe in the graph, Herkimer shows a more rapid early growth in covid numbers than Jefferson does.
+=======
+In this graph, the green plot and the teal plot represents the cumulative positives in Warren and Lewis county respectively. As we observe in the graph, Warren shows a more rapid growth in covid numbers than Lewis does.
+>>>>>>> 1eba6482a8341a89b8e9123d9615ccc3226a1921
+
+## Income Data and Covid Case Growth
+
+In our exploratory visualization, we attempt to uncover any pattern that links the poverty rate to Covid impact.
+
+### Scatterplot showing Covid Positive Rate and Poverty Rate
+
+The graph below shows the Covid Positive Rate plotted against Poverty Rate of each county. The positive rate is derived from dividing the Nov 28th cumulative positives by total census population.
+
+```{r income correlation}
+  covid_data <- nys_case[nys_case$TestDate == '11/28/2020',]
+  covid_data <- covid_data[c('County', 'Cumulative_Positives')]
+  income <- read_excel("./dataset/Income/Income.xlsx")
+  income$poverty <- income$Below_Poverty / income$Total_Pop_Census
+  corr_df<-merge(x=covid_data, y=income, by.x="County", by.y = "Geographic", all= T)
+  corr_df$x_var <- corr_df$Below_Poverty /corr_df$Total_Pop_Census
+  corr_df$y_var <- corr_df$Cumulative_Positives / corr_df$Total_Pop_Census
+  p<-ggplot(corr_df, aes(x = x_var, y = y_var)) +
+    geom_point() +
+    geom_text(aes(
+      label=ifelse(
+        (x_var<0.08 | x_var>0.2 | y_var>0.04) & y_var>0.02,as.character(County),'')),
+              hjust=0.5,vjust=0) +
+    xlab("Poverty Rate") +
+    ylab("Covid Positive Rate") +
+    ggtitle("Scatterplot Showing Covid-Poverty Correlation")
+  p <- p + expand_limits(x = 0, y = 0)
+  p
+```
+
+Surprisingly, the general correlation is rather low (-0.03). However, certain outliers reveal some interesting information. The outliers that are labeled on the scatter plot are mostly counties in or near New York metropolitan area, which are hit hardest due to the high population density within the area. If we only look at the counties within the New York metropolitan area or only the counties outside New York metropolitan area, we could observe a positive correlation between Poverty Rate and Cumulative Case counts.
+
+## Race Data and Covid Case Growth
+
+In our investigation, we attempt to discover any patterns between race data and Covid impact in each county.
+
+### Biased Racial Data
+
+The racial data with respect to each county is drastically different depending on whether the counties are in New York Metropolitan or not. The graph below indicates that if we include all the counties in our exploratory analysis, we probabily won't find any meaningful results due to those outliers. In that sense, we will separate all the metropolitan area counties and surrounding counties from the rest of the counties before attempting to find any correlation.
+
+```{r biased data}
+  race_df <- read_excel("./dataset/race/race.xlsx")
+  corr_df$white_p <- race_df$White / race_df$Total_Pop
+  corr_df$black_p <- race_df$African_American / race_df$Total_Pop
+  corr_df$asian_p <- race_df$Asian / race_df$Total_Pop
+  corr_df$other_p <- race_df$Other / race_df$Total_Pop
+  race_covid <- merge(x=nys_case[nys_case$TestDate == '11/28/2020',],
+                      y=corr_df, by.x="County", by.y = "County", all= T)
+  matrix_df <- race_covid[c("County", "y_var",
+                            'white_p', "black_p", "asian_p", "other_p")]
+  ggplot(matrix_df, aes(x = white_p, y = y_var)) +
+      geom_point() +
+      geom_text(aes(
+          label=ifelse(
+              y_var>0.03|white_p<0.6,as.character(County),'')),
+          hjust=0.5,vjust=0) +
+      xlab("White Percentage") +
+      ylab("Covid Postive Rate") +
+      ggtitle("Scatterplot Showing how Metropolitan Area counties differ from other counties")
+  metrolist <- c("Suffolk", "Sullivan", "Nassau",
+                 "Kings", "Queens", "Bronx", "New York",
+                 "Westchester", "Rockland", "Richmond", "Orange")
+
+```
+
+### Scatterplots Showing Correlation Between Race and Covid Case Growth in/outside Metropolitan Areas
+
+```{r metro}
+  metro_df <- matrix_df[matrix_df$County %in% metrolist,]
+  subrb_df <- matrix_df[!(matrix_df$County %in% metrolist),]
+  colnames(metro_df) <- c('County', "Covid_Rate", "White", "Black", "Asian", "Other")
+  colnames(subrb_df) <- c('County', "Covid_Rate", "White", "Black", "Asian", "Other")
+  
+  metro_df <- metro_df %>% pivot_longer(c("White", "Black", "Asian", "Other"),
+                                        names_to ="race", values_to = "percent")
+  subrb_df <- subrb_df %>% pivot_longer(c("White", "Black", "Asian", "Other"),
+                                        names_to ="race", values_to = "percent")
+  ggplot(metro_df, aes(x=percent, y=Covid_Rate)) +
+    geom_point() +
+    facet_wrap(~race, scales = "free_x") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)) +
+    ggtitle("Scatterplot of Covid-Race in Metropolitan Areas") +
+    xlab("Race Percentage") +
+    ylab("Covid Postive Rate") +
+    geom_text(aes(
+          label=ifelse(
+              Covid_Rate>0.05,as.character(County),'')),
+          hjust=0.5,vjust=0)
+```
+
+The graph in display shows the scatterplots of Covid case percentage against race distributions in Metropolitan Areas.
+
+```{r subrb}
+  ggplot(subrb_df, aes(x=percent, y=Covid_Rate)) +
+    geom_point() +
+    facet_wrap(~race, scales = "free_x") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0, hjust=0)) +
+    ggtitle("Scatterplot of Covid-Race outside Metropolitan Areas") +
+    xlab("Race Percentage") +
+    ylab("Covid Postive Rate") +
+    geom_text(aes(
+          label=ifelse(
+              Covid_Rate>0.0287,as.character(County),'')),
+          hjust=0.5,vjust=0)
+```
+
+The graph in display shows the scatterplots of Covid case percentage against race distributions outside Metropolitan Areas.
+
+Overall, we observe some patterns indicating that higher percentage of people of color, higher the covid impact seems to be. However, we immediately noticed that the correlation comes from Third-cause fallacy. The high population density can cause both high number of Covid percentage and high percentage of people of color at the same time.
+
+That said, there are some information we can obtain from the scatterplots. It is easy to observe that if we remove outliers which represents densely populated counties from the plot, correlation is rather weak. It suggests that all counties in New York are affected by Covid situation regardless the race distribution.
+
+## Political Data and Covid Case Growth
+
+In this part of our data visualization analysis, we want to investigate whether the Covid situation affected the election results of 2020. To be more specific, we want to ask the question whether the covid situation caused counties to flip from red to blue.
+
+### Covid Situation in Flipped Counties
+
+To visualize our findings, we compare the Covid Positive Rate of four flipped counties (from red to blue) with the average of that from red-shifted counties in 2020. The graph below presents the time series data that shows cumulative positive rates.
+
+```{r political compare}
+  pol_df <- read_excel("./dataset/Election/President2020.xlsx")
+  past_df <- read_excel("./dataset/Election/2016President.xlsx")
+  
+  pol_df$Biden20 <- pol_df$`Biden(DEM)` + pol_df$`Biden(WOR)`
+  pol_df$Trump20 <- pol_df$`Trump(CON)` + pol_df$`Trump(REP)`
+  pol_df <- pol_df[c("County", "Biden20", "Trump20")]
+  
+  past_df$Clinton16 <- past_df$`Clinton_Kaine(DEM)` + past_df$`Clinton_Kaine(WOR)` + past_df$`Clinton_Kaine(WEP)`
+  past_df$Trump16 <- past_df$`Trump_Pence(REP)` + past_df$`Trump_Pence(CON)`
+  past_df <- past_df[c("County", "Clinton16", "Trump16")]
+  total <- merge(x=pol_df, y=past_df, by.x="County", by.y = "County", all= T)
+  
+  flipped <- total[(total$Biden20>total$Trump20 & total$Clinton16<total$Trump16),]
+  
+  nonflip <- total[(total$Biden20<total$Trump20) & (total$Biden20/total$Trump20 < total$Clinton16/total$Trump16),]
+  
+  info$Covidrate <- info$Cumulative_Positives / info$Total_Labor
+  nys_cum <- info[c("TestDate", "County", "Covidrate")]
+  Case <- nys_cum %>% pivot_wider(names_from = County, values_from = Covidrate)
+  flipped_ts <- Case[append("TestDate", flipped$County)]
+  other_ts <- Case[append("TestDate", nonflip$County)]
+  other_ts$avg_rate = rowMeans(other_ts[,c(-1)])
+  other_ts <- other_ts[c("TestDate", "avg_rate")]
+  
+  flipped_ts$Red_Shift <- other_ts$avg_rate
+  flipped_ts <- xts(flipped_ts[,-1], order.by=flipped_ts$TestDate)
+  dygraph(flipped_ts, 
+               main='Covid Rate of Flipped/Other Counties') %>%
+    dyAxis("y", label = "Covid Rate") %>%
+    dyAxis("x", label = "Time") %>%
+    dyLegend(width = 700) %>%
+    dyOptions(axisLineWidth = 2, fillGraph = TRUE, drawGrid = FALSE)
+```
+
+In general, the flipped counties experience a more rapid covid positive rate growth than the counties that shifted red in 2020. Broome county stands out in terms of covid growth, especially during the period from Oct 2020 to Nov 2020. This may explain the voter turnout in the county.

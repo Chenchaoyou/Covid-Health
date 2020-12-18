@@ -20,8 +20,9 @@ Political Data, namely the 2020 and 2016 presidential election results data, are
 
 Geographic Data is the NYS map in the form of shapefile, which is ready to be used in mapping variables to counties.
 
-Economic Data are collected from <b>US Census Bureau</b> (https://data.census.gov/cedsci/) under the keyword INCOME/POVERTY. The data shows total number of population and population determined to be under poverty by county reports.
+Economic Data are collected from <b>US Census Bureau</b> (https://data.census.gov/cedsci/) under the keyword INCOME/POVERTY. The data shows the county population and total number of people determined to be under poverty.
 
 Demographic Data are gathered from <b>US Census Bureau</b> (https://data.census.gov/cedsci/) under the keyword race. We chose the more general race data over the specific detailed race subgroup count, because we believe that race subgroups are too detailed for observing patterns in the exploratory data analysis. The dataset consists of race counts by counties. There are 62 rows of data each corresponding to a county.
 
 Labor Mobility Data are also from <b>US Census Bureau</b> (https://data.census.gov/cedsci/) under the keyword PLACE OF WORK. It consists of number of workers working inside/outside place of residence and the number of population without residence, reported by each county. The data has 62 rows corresponding to 62 county reports.
+

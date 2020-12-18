@@ -433,3 +433,57 @@ The graph in display shows the scatterplots of Covid case percentage against rac
 Overall, we observe some patterns indicating that higher percentage of people of color, higher the covid impact seems to be. However, we immediately noticed that the correlation comes from Third-cause fallacy. The high population density can cause both high number of Covid percentage and high percentage of people of color at the same time.
 
 That said, there are some information we can obtain from the scatterplots. It is easy to observe that if we remove outliers which represents densely populated counties from the plot, correlation is rather weak. It suggests that all counties in New York are affected by Covid situation regardless the race distribution.
+
+
+## Covid and the 2020 US Election in NYS
+
+### With this series of exploratory data analysis we are trying to answer the question did COVID impact the election results in NYS? NYS wwas one of the hardest hit states in the US by COVID, particuarlly in March. As a state that traditionally votes democratic, we are curious to see if the pandemic impacted New Yorker's votings habits. 
+
+To answer this question we are exploring the counties that flipped. 
+
+```{r load packages}
+devtools::install_github("UrbanInstitute/urbnmapr")
+library(urbnmapr)
+##need to remove this package and the statement below if not inclduing in project
+```
+We are using the Urban Institute's mapping package to allow us to explore other types of spacial packages. 
+
+```{r Election: Create variables}
+X_Variable$Clinton_Total2016 <- X_Variable$`Clinton_Kaine(DEM)`+X_Variable$`Clinton_Kaine(WEP)`+ X_Variable$`Clinton_Kaine(WOR)`
+X_Variable$Trump_Total2016 <- X_Variable$`Trump_Pence(REP)` + X_Variable$`Trump_Pence(CON)`
+X_Variable$Trump_Total2020 <- X_Variable$`Trump(CON)` + X_Variable$`Trump(REP)`
+X_Variable$Biden_Total2020  <- X_Variable$`Biden(DEM)` + X_Variable$`Biden(WOR)`
+X_Variable$CountyVictor2016 <- if_else(X_Variable$Clinton_Total2016 > X_Variable$Trump_Total2016, "Clinton", "Trump")
+X_Variable$CountyVictor2020 <- if_else(X_Variable$Biden_Total2020 > X_Variable$Trump_Total2020, "Biden", "Trump")
+X_Variable$CountyChange <- if_else(X_Variable$CountyVictor2016=="Trump" & X_Variable$CountyVictor2020=="Trump", "Trump Kept", "NA")
+X_Variable$CountyChange2 <- if_else(X_Variable$CountyChange=="NA" & X_Variable$CountyVictor2016=="Clinton" & X_Variable$CountyVictor2020=="Biden", "Dem's Kept", "NA")
+X_Variable$Flipped<- if_else(X_Variable$CountyChange=="NA" & X_Variable$CountyChange2=="NA", "Flipped", "No Change")
+Flipped_Counties <- X_Variable$Flipped=="Flipped"
+Flipped_Counties_Data <- filter(X_Variable, X_Variable$Flipped=="Flipped")
+```
+
+```{r map of flipped counties}
+```
+
+```{r flipped poverty}
+PercentPoverty <- (Flipped_Counties_Data$Below_Poverty/Flipped_Counties_Data$Total_Pop_Census)*100
+
+ggplot(Flipped_Counties_Data, aes(x=Flipped_Counties_Data$County, y=Flipped_Counties_Data$PercentPoverty)) + geom_bar(stat = "identity") + ggtitle("Flipped Coumties: Percent Poverty") + labs(y = "Percent Poverty", x = "County")
+```
+
+
+```{r flipped race}
+race$perwhite <- (race$White/race$Total_Pop)*100
+race$perAfAm <- (race$African_American/race$Total_Pop)*100
+race$perNatAm <- (race$Native_American/race$Total_Pop)*100
+race$perAsian<- (race$Asian/race$Total_Pop)*100
+race$perPacIsl- (race$`Hawaiian/Pacific_Islander`/race$Total_Pop)*100
+ace$perPacIsl <- (race$`Hawaiian/Pacific_Islander`/race$Total_Pop)
+> race$perOth <- (race$Other/race$Total_Pop)
+> race$perTwo <- (race$Other/race$Total_Pop)
+
+
+Flipped_Counties_race <- filter(race, race$Geographic=="Broome" | race$Geographic=="Essex" | race$Geographic=="Rensselaer" | race$Geographic=="St. Lawrence")
+
+```
+

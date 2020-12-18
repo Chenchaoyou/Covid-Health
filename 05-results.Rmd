@@ -289,18 +289,15 @@ mymap <- leaflet() %>%
 mymap  
 ```
 
-<<<<<<< HEAD
 The heatmap shows the percentage of labor working outside county of residence. Deeper the color of the county is, the more ratio of workforce commutes outside the county. The teal colored circles represent the number of cumulative cases within each month of 2020. 
 
 We observe the following general pattern for suburban counties: Deeper the color is (More commuters), the more likely that corresponding county experiences an <b>early stage</b> sharp growth in covid numbers. Our hypothesis is that for a suburban county, the more people working outside county of residence, the more likely Covid transmitted early to that county, which resulted in an early rapid growth in case numbers. 
-=======
+
 The heatmap shows the percentage of labor working outside county of residence. Deeper the color of the county is, the more ratio of workforce commutes outside the county. The teal colored circles represent the number of cumulative cases within each month of 2020. The general pattern indicates and deeper the color is, the more likely that corresponding county and the surroundings of which experience sharp growth in COVID numbers. 
 
 We recognize the drawbacks to including circles in our exploratory analysis. As it can be difficult for viewers to assess the width of circles across a plane, and then associate that increase in width to a proportional increase in COVID case numbers. In addition, some viewers may find it hard to process patters about commuting and monthly covid cases in one graph. 
 
 A possible alternative approach may have been to break this interactive map into a series of two to six interactive maps: 1) have a static heat map showing the percentage of labors working outside their county of residence (e.g., have those counties pop-out when the specified percentage range is selected), then 2) Convert the variable **percentage labors working outside their county** to a categorical variable (e.g., group the counties into five or six groups based on percentage of labors working outside their county), and have a series of five or six of interactive heat maps that explore how the monthly COVID case load has changed since March. However, we we do not yet have the technical skill to feasibly complete such maps for this project. 
-
->>>>>>> 1eba6482a8341a89b8e9123d9615ccc3226a1921
 
 ### Time Series Comparison between Two Counties Covid Growth
 
@@ -332,11 +329,9 @@ Comparing the areas of the circles is not an intuitive way to understand the pat
     dyOptions(axisLineWidth = 2, fillGraph = TRUE, drawGrid = FALSE)
 ```
 
-<<<<<<< HEAD
 In this graph, the green plot and the teal plot represents the cumulative postives in Herkimer and Jefferson county respectively. As we observe in the graph, Herkimer shows a more rapid early growth in covid numbers than Jefferson does.
-=======
+
 In this graph, the green plot and the teal plot represents the cumulative positives in Warren and Lewis county respectively. As we observe in the graph, Warren shows a more rapid growth in covid numbers than Lewis does.
->>>>>>> 1eba6482a8341a89b8e9123d9615ccc3226a1921
 
 ## Income Data and Covid Case Growth
 
@@ -488,7 +483,7 @@ To visualize our findings, we compare the Covid Positive Rate of four flipped co
                main='Covid Rate of Flipped/Other Counties') %>%
     dyAxis("y", label = "Covid Rate") %>%
     dyAxis("x", label = "Time") %>%
-    dyLegend(width = 700) %>%
+    dyLegend(width = 600) %>%
     dyOptions(axisLineWidth = 2, fillGraph = TRUE, drawGrid = FALSE)
 ```
 

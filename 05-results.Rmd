@@ -326,7 +326,7 @@ Comparing the areas of the circles is not an intuitive way to understand the pat
     dyOptions(axisLineWidth = 2, fillGraph = TRUE, drawGrid = FALSE)
 ```
 
-In this graph, the green plot and the teal plot represents the cumulative postives in Warren and Lewis county respectively. As we observe in the graph, Warren shows a more rapid growth in covid numbers than Lewis does.
+In this graph, the green plot and the teal plot represents the cumulative positives in Warren and Lewis county respectively. As we observe in the graph, Warren shows a more rapid growth in covid numbers than Lewis does.
 
 ## Income Data and Covid Case Growth
 
@@ -361,7 +361,7 @@ Surprisingly, the general correlation is rather low (-0.03). However, certain ou
 
 ## Race Data and Covid Case Growth
 
-In our investigation, we attempt to discover any correlation between race data and Covid impact in each county.
+In our investigation, we attempt to discover any patterns between race data and Covid impact in each county.
 
 ### Biased Racial Data
 

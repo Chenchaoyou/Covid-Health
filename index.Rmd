@@ -7,9 +7,20 @@ site: bookdown::bookdown_site
 
 # Introduction
 
-The Covid-19 Pandemic of 2020 has irreversibly reshaped the world. Among US states and counties, disease prevention performance are drastically different in terms of positive cases and mortality during the crisis. In hindsight, we would like to ask ourselves why some regions were being hit worse than others. While most national newspapers and websites provide plots and charts demonstrating how COVID cases have increased across a designated regions, less readily available are data visualizations exploring the reasons as to why sub-divisions occur. Do factors such as racial, political, or economical differences contribute to the contrasting regional impact of Covid-19?
+The Covid-19 Pandemic of 2020 has irreversibly reshaped the world. Among US states and counties, disease prevention performance are drastically different in terms of positive cases and mortality during the crisis. In hindsight, we would like to ask ourselves why some regions were being hit worse than others. While most national newspapers and websites provide plots and charts demonstrating how COVID cases have increased across a designated regions, less readily available are data visualizations exploring the reasons as to why sub-divisions occur. For example, do factors such as racial, political, or economical differences contribute to the contrasting regional impact of Covid-19?
 
 Any insights we gained through investigating this issue can potentially save lives in future great pandemics.
 
-In this project, we will take a closer look at geographic/economic/demographic/political differences between different counties within New York State, in hopes to shed more light on the factors that may or may not have a correlation with Covid situation in each county. We will provide early exploratory data analysis at this stage of the project. Causation will not be implied by correlation at early exploratory analysis but will offer directions in which we can further investigate.
+In this project, we will take a closer look at geographic/economic/demographic/political differences between different counties within New York State, in hopes to shed more light on the factors that may or may not have a correlation with Covid situation in each county. 
+
+We aim to explore three questions:
+
+1) Do work residence and commuting behavior contribute to higher rates of COVID among New York counties? 
+
+2) Is there a pattern between income and COVID case growth among New York counties?
+
+3) 
+
+
+We will provide early exploratory data analysis at this stage of the project. Causation will not be implied by correlation at early exploratory analysis but will offer directions in which we can further investigate.
 

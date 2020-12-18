@@ -112,6 +112,9 @@
 <li class="chapter" data-level="5.3.1" data-path="results.html"><a href="results.html#biased-racial-data"><i class="fa fa-check"></i><b>5.3.1</b> Biased Racial Data</a></li>
 <li class="chapter" data-level="5.3.2" data-path="results.html"><a href="results.html#scatterplots-showing-correlation-between-race-and-covid-case-growth-inoutside-metropolitan-areas"><i class="fa fa-check"></i><b>5.3.2</b> Scatterplots Showing Correlation Between Race and Covid Case Growth in/outside Metropolitan Areas</a></li>
 </ul></li>
+<li class="chapter" data-level="5.4" data-path="results.html"><a href="results.html#political-data-and-covid-case-growth"><i class="fa fa-check"></i><b>5.4</b> Political Data and Covid Case Growth</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="results.html"><a href="results.html#covid-situation-in-flipped-counties"><i class="fa fa-check"></i><b>5.4.1</b> Covid Situation in Flipped Counties</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -142,9 +145,9 @@
 <p><img src="finalproj_files/figure-html/visna%20Pol-1.png" width="672" /></p>
 <p>After taking a closer look at the dataset, we find that the only missing values in the election result dataset are a row missing number of void votes and blank votes.</p>
 <pre><code>## # A tibble: 1 x 5
-##   County             `Biden(DEM)` `Trump(REP)`  Void Blank
-##   &lt;chr&gt;                     &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 Westchester County       296129       133397    NA    NA</code></pre>
+##   County      `Biden(DEM)` `Trump(REP)`  Void Blank
+##   &lt;chr&gt;              &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 Westchester       296129       133397    NA    NA</code></pre>
 <p>We replaced those missing values with the median of the corresponding columns. We choose median over mean because the variance of Void and Blank votes are high and median is more robust when extreme outliers are present. We replace the missing value of Void votes with median value of 202 and Blank votes with median value of 102.</p>
 </div>
 <div id="income-data-missing-values" class="section level2">

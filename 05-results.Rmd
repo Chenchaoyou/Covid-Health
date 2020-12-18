@@ -91,55 +91,55 @@ info_mar <- info[info$TestDate <= '2020-03-28',]
 monthly <- info_mar %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_mar <-merge(x=info_mar, y=monthly, by.x="County", by.y = "County", all= T)
 info_mar <- as_tibble(info_mar)
-info_mar_select <- info_mar[(info_mar$County == "Warren")|(info_mar$County == "Lewis"),]
+info_mar_select <- info_mar[(info_mar$County == "Herkimer")|(info_mar$County == "Jefferson"),]
 
 info_apr <- info[(info$TestDate > '2020-03-28')&(info$TestDate <= '2020-04-28'),]
 monthly <- info_apr %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_apr <-merge(x=info_apr, y=monthly, by.x="County", by.y = "County", all= T)
 info_apr <- as_tibble(info_apr)
-info_apr_select <- info_apr[(info_apr$County == "Warren")|(info_apr$County == "Lewis"),]
+info_apr_select <- info_apr[(info_apr$County == "Herkimer")|(info_apr$County == "Jefferson"),]
 
 info_may <- info[(info$TestDate > '2020-04-28')&(info$TestDate <= '2020-05-28'),]
 monthly <- info_may %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_may <-merge(x=info_may, y=monthly, by.x="County", by.y = "County", all= T)
 info_may <- as_tibble(info_may)
-info_may_select <- info_may[(info_may$County == "Warren")|(info_may$County == "Lewis"),]
+info_may_select <- info_may[(info_may$County == "Herkimer")|(info_may$County == "Jefferson"),]
 
 info_jun <- info[(info$TestDate > '2020-05-28')&(info$TestDate <= '2020-06-28'),]
 monthly <- info_jun %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_jun <-merge(x=info_jun, y=monthly, by.x="County", by.y = "County", all= T)
 info_jun <- as_tibble(info_jun)
-info_jun_select <- info_jun[(info_jun$County == "Warren")|(info_jun$County == "Lewis"),]
+info_jun_select <- info_jun[(info_jun$County == "Herkimer")|(info_jun$County == "Jefferson"),]
 
 info_jul <- info[(info$TestDate > '2020-06-28')&(info$TestDate <= '2020-07-28'),]
 monthly <- info_jul %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_jul <-merge(x=info_jul, y=monthly, by.x="County", by.y = "County", all= T)
 info_jul <- as_tibble(info_jul)
-info_jul_select <- info_jul[(info_jul$County == "Warren")|(info_jul$County == "Lewis"),]
+info_jul_select <- info_jul[(info_jul$County == "Herkimer")|(info_jul$County == "Jefferson"),]
 
 info_aug <- info[(info$TestDate > '2020-07-28')&(info$TestDate <= '2020-08-28'),]
 monthly <- info_aug %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_aug <-merge(x=info_aug, y=monthly, by.x="County", by.y = "County", all= T)
 info_aug <- as_tibble(info_aug)
-info_aug_select <- info_aug[(info_aug$County == "Warren")|(info_aug$County == "Lewis"),]
+info_aug_select <- info_aug[(info_aug$County == "Herkimer")|(info_aug$County == "Jefferson"),]
 
 info_sep <- info[(info$TestDate > '2020-08-28')&(info$TestDate <= '2020-09-28'),]
 monthly <- info_sep %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_sep <-merge(x=info_sep, y=monthly, by.x="County", by.y = "County", all= T)
 info_sep <- as_tibble(info_sep)
-info_sep_select <- info_sep[(info_sep$County == "Warren")|(info_sep$County == "Lewis"),]
+info_sep_select <- info_sep[(info_sep$County == "Herkimer")|(info_sep$County == "Jefferson"),]
 
 info_oct <- info[(info$TestDate > '2020-09-28')&(info$TestDate <= '2020-10-28'),]
 monthly <- info_oct %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_oct <-merge(x=info_oct, y=monthly, by.x="County", by.y = "County", all= T)
 info_oct <- as_tibble(info_oct)
-info_oct_select <- info_oct[(info_oct$County == "Warren")|(info_oct$County == "Lewis"),]
+info_oct_select <- info_oct[(info_oct$County == "Herkimer")|(info_oct$County == "Jefferson"),]
 
 info_nov <- info[(info$TestDate > '2020-10-28')&(info$TestDate <= '2020-11-28'),]
 monthly <- info_nov %>% group_by(County) %>% summarize(monthly = sum(New_Positives))
 info_nov <-merge(x=info_nov, y=monthly, by.x="County", by.y = "County", all= T)
 info_nov <- as_tibble(info_nov)
-info_nov_select <- info_nov[(info_nov$County == "Warren")|(info_nov$County == "Lewis"),]
+info_nov_select <- info_nov[(info_nov$County == "Herkimer")|(info_nov$County == "Jefferson"),]
 # Construct Leaflet Map
 
 mymap <- leaflet() %>% 
@@ -289,39 +289,41 @@ mymap <- leaflet() %>%
 mymap  
 ```
 
-The heatmap shows the percentage of labor working outside county of residence. Deeper the color of the county is, the more ratio of workforce commutes outside the county. The teal colored circles represent the number of cumulative cases within each month of 2020. The general pattern indicates and deeper the color is, the more likely that corresponding county and the surroundings of which experience sharp growth in covid numbers. 
+The heatmap shows the percentage of labor working outside county of residence. Deeper the color of the county is, the more ratio of workforce commutes outside the county. The teal colored circles represent the number of cumulative cases within each month of 2020. 
+
+We observe the following general pattern for suburban counties: Deeper the color is (More commuters), the more likely that corresponding county experiences an <b>early stage</b> sharp growth in covid numbers. Our hypothesis is that for a suburban county, the more people working outside county of residence, the more likely Covid transmitted early to that county, which resulted in an early rapid growth in case numbers. 
 
 ### Time Series Comparison between Two Counties Covid Growth
 
-Comparing the areas of the circles is not an intuitive way to understand the pattern difference. To better understand the difference, we compare two counties marked on the map above (Warren ~ 50% and Lewis ~ 15%) that have very different commuter percentages and show their case growth below:
+Comparing the areas of the circles is not an intuitive way to understand the pattern difference. To better understand the difference, we compare two counties suburb counties marked on the map above (Herkimer ~ 50% and Jefferson ~ 4%) that have very different commuter percentages and show their case growth below:
 
 ```{r }
   series <- info[,c('County', 'TestDate', "Cumulative_Positives")]
-  max_county <- "Warren"
-  min_county <- 'Lewis'
-  max_pop <- nys_spdf@data[nys_spdf@data$NAME == 'Warren',]$POP2000
-  min_pop <- nys_spdf@data[nys_spdf@data$NAME == 'Lewis',]$POP2000 
+  max_county <- "Herkimer"
+  min_county <- 'Jefferson'
+  max_pop <- nys_spdf@data[nys_spdf@data$NAME == 'Herkimer',]$POP2000
+  min_pop <- nys_spdf@data[nys_spdf@data$NAME == 'Jefferson',]$POP2000 
   ratio <- max_pop/min_pop
   
   max_ts <- series[series$County == max_county,]
   min_ts <- series[series$County == min_county,]
-  max_ts$Warren <- max_ts$Cumulative_Positives
-  min_ts$Lewis <- min_ts$Cumulative_Positives
+  max_ts$Herkimer <- max_ts$Cumulative_Positives
+  min_ts$Jefferson <- min_ts$Cumulative_Positives
   compare <- merge(x=max_ts, y=min_ts, by.x="TestDate", by.y = "TestDate", all= T)
-  compare <- compare[c('TestDate', 'Warren', 'Lewis')]
+  compare <- compare[c('TestDate', 'Herkimer', 'Jefferson')]
 
   compare_ts <- xts(compare[,-1], order.by=compare$TestDate)
   dygraph(compare_ts, 
-               main='True/Scaled Cumulative Cases of Warren/Lewis County') %>%
-    dySeries("Lewis", axis = 'y2') %>%
-    dyAxis("y", label = "Cumulative Positives of Warren") %>%
+               main='Cumulative Cases of Herkimer/Jefferson County') %>%
+    dySeries("Jefferson", axis = 'y2') %>%
+    dyAxis("y", label = "Cumulative Positives of Herkimer") %>%
     dyAxis("y2", label = "Cumulative Positives of Yates", independentTicks = TRUE) %>%
     dyAxis("x", label = "Time") %>%
     dyLegend(width = 500) %>%
     dyOptions(axisLineWidth = 2, fillGraph = TRUE, drawGrid = FALSE)
 ```
 
-In this graph, the green plot and the teal plot represents the cumulative postives in Warren and Lewis county respectively. As we observe in the graph, Warren shows a more rapid growth in covid numbers than Lewis does.
+In this graph, the green plot and the teal plot represents the cumulative postives in Herkimer and Jefferson county respectively. As we observe in the graph, Herkimer shows a more rapid early growth in covid numbers than Jefferson does.
 
 ## Income Data and Covid Case Growth
 
@@ -433,3 +435,48 @@ The graph in display shows the scatterplots of Covid case percentage against rac
 Overall, we observe some patterns indicating that higher percentage of people of color, higher the covid impact seems to be. However, we immediately noticed that the correlation comes from Third-cause fallacy. The high population density can cause both high number of Covid percentage and high percentage of people of color at the same time.
 
 That said, there are some information we can obtain from the scatterplots. It is easy to observe that if we remove outliers which represents densely populated counties from the plot, correlation is rather weak. It suggests that all counties in New York are affected by Covid situation regardless the race distribution.
+
+## Political Data and Covid Case Growth
+
+In this part of our data visualization analysis, we want to investigate whether the Covid situation affected the election results of 2020. To be more specific, we want to ask the question whether the covid situation caused counties to flip from red to blue.
+
+### Covid Situation in Flipped Counties
+
+To visualize our findings, we compare the Covid Positive Rate of four flipped counties (from red to blue) with the average of that from red-shifted counties in 2020. The graph below presents the time series data that shows cumulative positive rates.
+
+```{r political compare}
+  pol_df <- read_excel("./dataset/Election/President2020.xlsx")
+  past_df <- read_excel("./dataset/Election/2016President.xlsx")
+  
+  pol_df$Biden20 <- pol_df$`Biden(DEM)` + pol_df$`Biden(WOR)`
+  pol_df$Trump20 <- pol_df$`Trump(CON)` + pol_df$`Trump(REP)`
+  pol_df <- pol_df[c("County", "Biden20", "Trump20")]
+  
+  past_df$Clinton16 <- past_df$`Clinton_Kaine(DEM)` + past_df$`Clinton_Kaine(WOR)` + past_df$`Clinton_Kaine(WEP)`
+  past_df$Trump16 <- past_df$`Trump_Pence(REP)` + past_df$`Trump_Pence(CON)`
+  past_df <- past_df[c("County", "Clinton16", "Trump16")]
+  total <- merge(x=pol_df, y=past_df, by.x="County", by.y = "County", all= T)
+  
+  flipped <- total[(total$Biden20>total$Trump20 & total$Clinton16<total$Trump16),]
+  
+  nonflip <- total[(total$Biden20<total$Trump20) & (total$Biden20/total$Trump20 < total$Clinton16/total$Trump16),]
+  
+  info$Covidrate <- info$Cumulative_Positives / info$Total_Labor
+  nys_cum <- info[c("TestDate", "County", "Covidrate")]
+  Case <- nys_cum %>% pivot_wider(names_from = County, values_from = Covidrate)
+  flipped_ts <- Case[append("TestDate", flipped$County)]
+  other_ts <- Case[append("TestDate", nonflip$County)]
+  other_ts$avg_rate = rowMeans(other_ts[,c(-1)])
+  other_ts <- other_ts[c("TestDate", "avg_rate")]
+  
+  flipped_ts$Red_Shift <- other_ts$avg_rate
+  flipped_ts <- xts(flipped_ts[,-1], order.by=flipped_ts$TestDate)
+  dygraph(flipped_ts, 
+               main='Covid Rate of Flipped/Other Counties') %>%
+    dyAxis("y", label = "Covid Rate") %>%
+    dyAxis("x", label = "Time") %>%
+    dyLegend(width = 700) %>%
+    dyOptions(axisLineWidth = 2, fillGraph = TRUE, drawGrid = FALSE)
+```
+
+In general, the flipped counties experience a more rapid covid positive rate growth than the counties that shifted red in 2020. Broome county stands out in terms of covid growth, especially during the period from Oct 2020 to Nov 2020. This may explain the voter turnout in the county.

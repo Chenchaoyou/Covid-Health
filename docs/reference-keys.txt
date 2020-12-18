@@ -13,5 +13,7 @@ scatterplot-showing-covid-positive-rate-and-poverty-rate
 race-data-and-covid-case-growth
 biased-racial-data
 scatterplots-showing-correlation-between-race-and-covid-case-growth-inoutside-metropolitan-areas
+political-data-and-covid-case-growth
+covid-situation-in-flipped-counties
 interactive-component
 conclusion

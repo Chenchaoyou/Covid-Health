@@ -473,6 +473,16 @@ ggplot(Flipped_Counties_Data, aes(x=Flipped_Counties_Data$County, y=Flipped_Coun
 
 
 ```{r flipped race}
+race$perwhite <- (race$White/race$Total_Pop)*100
+race$perAfAm <- (race$African_American/race$Total_Pop)*100
+race$perNatAm <- (race$Native_American/race$Total_Pop)*100
+race$perAsian<- (race$Asian/race$Total_Pop)*100
+race$perPacIsl- (race$`Hawaiian/Pacific_Islander`/race$Total_Pop)*100
+ace$perPacIsl <- (race$`Hawaiian/Pacific_Islander`/race$Total_Pop)
+> race$perOth <- (race$Other/race$Total_Pop)
+> race$perTwo <- (race$Other/race$Total_Pop)
+
+
 Flipped_Counties_race <- filter(race, race$Geographic=="Broome" | race$Geographic=="Essex" | race$Geographic=="Rensselaer" | race$Geographic=="St. Lawrence")
 
 ```

@@ -160,7 +160,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
     function choice(){
       svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
       
-     svg.append('text').attr('x', 230).attr('y', ys(100)).text('Choose informtaion you want to know')
+     svg.append('text').attr('x', 230).attr('y', ys(100)).text('Choose information you want to know')
        .attr('font-size', '20px')
        
        svg.append('text').attr('id', 'CovidTesT').attr('x', 130).attr('y',ys(400)).text('Covid Tests').attr('font-size','25px')
@@ -183,7 +183,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
        svg.append('rect').attr('x', 370).attr('y', ys(360)).attr('height', 80).attr('width', 20).attr('fill', 'blue')
        svg.append('rect').attr('x', 400).attr('y', ys(340)).attr('height', 60).attr('width', 20).attr('fill', 'red')
         
-         svg.append('text').attr('id', 'Electiondata').attr('x', 315).attr('y', ys(400)).text('Elevtion Voting').attr('font-size', '25px')
+         svg.append('text').attr('id', 'Electiondata').attr('x', 315).attr('y', ys(400)).text('Election Voting').attr('font-size', '25px')
          
          svg.append('text').attr('id','Residencedata').attr('x', 530).attr('y', ys(400)).text('Work Residence').attr('font-size', '25px')
         
@@ -217,9 +217,11 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
       
       svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
          
-        d3.csv('Work_Residence.csv').then(function(d){
+        d3.csv('https://raw.githubusercontent.com/Chenchaoyou/Covid-Health/main/Work_Residence.csv').then(function(d){
+        
+        
          
-           svg.append('text').attr('x', 160).attr('y', ys(540)).text('Work Residence Statistics for NYS in '+ d[i]['Geographic']).attr('font-size', '20px')
+           svg.append('text').attr('x', 120).attr('y', ys(540)).text('Work Residence Statistics for NYS in '+ d[i]['Geographic'] + ' County').attr('font-size', '20px')
         var Totallabor = parseInt(d[i]['Total_Labor'])
         var Withresidence = parseInt(d[i]['With_Residence'])
         var Workin = parseInt(d[i]['Work_in_PoR'])
@@ -233,7 +235,7 @@ var svg = d3.select('div#plot').append('svg').attr('id', 'svg1').attr('width', 1
            .domain([0, max])
          .range([0, 400]);
             
-            svg.append('text').attr('x', 450).attr('y', ys(400)).text('Totle Labor : ' + Totallabor).attr('font-size', '25px')
+            svg.append('text').attr('x', 450).attr('y', ys(400)).text('Total Labor : ' + Totallabor).attr('font-size', '25px')
             
             svg.append('text').attr('x', 150).attr('y', ys(80)).text('With Residence')
             svg.append('text').attr('x', 290).attr('y', ys(80)).text('No Residence')
@@ -267,10 +269,10 @@ var i = whichstate
       
 svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
       
-d3.csv('President2020.csv').then(function(d){
+d3.csv('https://raw.githubusercontent.com/Chenchaoyou/Covid-Health/main/President2020.csv').then(function(d){
          
          
-svg.append('text').attr('x', 160).attr('y', ys(540)).text('Election vote in 2020 in '+ d[i]['County']).attr('font-size', '20px')
+svg.append('text').attr('x', 80).attr('y', ys(540)).text('Election votes at 2020 in '+ d[i]['County'] + ' County').attr('font-size', '20px')
 
 var Bidenvote = parseInt(d[i]['Biden(DEM)'])+parseInt(d[i]['Biden(WOR)'] )
 var Trumpvote = parseInt(d[i]['Trump(REP)'])+parseInt(d[i]['Trump(CON)'])
@@ -296,10 +298,11 @@ var ys2 = d3.scaleLinear()
 }
     
     function showdataCovid(){
+    i = whichstate
     
        svg.append('rect').attr('x', 20).attr('y', 20).attr('width', 960).attr('height', 600).attr('fill', '#f7f2ee')
       
-      d3.csv('NYS_Covid_Case_1128.csv', function(d){
+      d3.csv('https://raw.githubusercontent.com/Chenchaoyou/Covid-Health/main/NYS_Covid_Case_1128.csv', function(d){
           return{
             TestDate : d.date,
         County : d.County,
@@ -312,13 +315,12 @@ var ys2 = d3.scaleLinear()
           
           }).then(function(data){
       
-       svg.append('text').attr('x', 160).attr('y', ys(500)).text('Statistics for Covid-19 for '+state+' at Nov.28').attr('font-size', '25px')
-        
+       svg.append('text').attr('x', 80).attr('y', ys(500)).text('Statistics for Covid-19 for '+data[i]['County'] +' County at Nov.28').attr('font-size', '25px')
         
          svg.append('text').attr('x',200).attr('y', ys(400)).text('New tested positives is : ' + data[i]['New_Positives'])
          svg.append('text').attr('x',200).attr('y', ys(300)).text('Total tested positive is : ' + data[i]['Cumulative_Positives'])
          svg.append('text').attr('x',200).attr('y', ys(200)).text('New test performed is : ' + data[i]['Tests_Performed'])
-         svg.append('text').attr('x',200).attr('y', ys(100)).text('Totle test performed is : ' + data[i]['Cumulative_Tests_Performed'])
+         svg.append('text').attr('x',200).attr('y', ys(100)).text('Total test performed is : ' + data[i]['Cumulative_Tests_Performed'])
             
       })
     }
@@ -1745,7 +1747,7 @@ var ys2 = d3.scaleLinear()
 
 
 </script>
-<p><a href="./mask.html">this link</a></p>
+<p><a href="./mask.html">Click here to watch instruction on Covid-19</a></p>
 
 </div>
             </section>

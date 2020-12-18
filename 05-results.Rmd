@@ -289,7 +289,12 @@ mymap <- leaflet() %>%
 mymap  
 ```
 
-The heatmap shows the percentage of labor working outside county of residence. Deeper the color of the county is, the more ratio of workforce commutes outside the county. The teal colored circles represent the number of cumulative cases within each month of 2020. The general pattern indicates and deeper the color is, the more likely that corresponding county and the surroundings of which experience sharp growth in covid numbers. 
+The heatmap shows the percentage of labor working outside county of residence. Deeper the color of the county is, the more ratio of workforce commutes outside the county. The teal colored circles represent the number of cumulative cases within each month of 2020. The general pattern indicates and deeper the color is, the more likely that corresponding county and the surroundings of which experience sharp growth in COVID numbers. 
+
+We recognize the drawbacks to including circles in our exploratory analysis. As it can be difficult for viewers to assess the width of circles across a plane, and then associate that increase in width to a proportional increase in COVID case numbers. In addition, some viewers may find it hard to process patters about commuting and monthly covid cases in one graph. 
+
+A possible alternative approach may have been to break this interactive map into a series of two to six interactive maps: 1) have a static heat map showing the percentage of labors working outside their county of residence (e.g., have those counties pop-out when the specified percentage range is selected), then 2) Convert the variable **percentage labors working outside their county** to a categorical variable (e.g., group the counties into five or six groups based on percentage of labors working outside their county), and have a series of five or six of interactive heat maps that explore how the monthly COVID case load has changed since March. However, we we do not yet have the technical skill to feasibly complete such maps for this project. 
+
 
 ### Time Series Comparison between Two Counties Covid Growth
 

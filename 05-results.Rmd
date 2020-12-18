@@ -452,7 +452,7 @@ In this part of our data visualization analysis, we want to investigate whether 
 
 To visualize our findings, we compare the Covid Positive Rate of four flipped counties (from red to blue) with the average of that from red-shifted counties in 2020. The graph below presents the time series data that shows cumulative positive rates.
 
-```{r political compare}
+```{r political compare, fig.width=6, fig.height=5}
   pol_df <- read_excel("./dataset/Election/President2020.xlsx")
   past_df <- read_excel("./dataset/Election/2016President.xlsx")
   
@@ -483,7 +483,7 @@ To visualize our findings, we compare the Covid Positive Rate of four flipped co
                main='Covid Rate of Flipped/Other Counties') %>%
     dyAxis("y", label = "Covid Rate") %>%
     dyAxis("x", label = "Time") %>%
-    dyLegend(width = 400) %>%
+    dyLegend(width = 500) %>%
     dyOptions(axisLineWidth = 2, fillGraph = TRUE, drawGrid = FALSE)
 ```
 
